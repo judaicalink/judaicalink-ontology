@@ -9,7 +9,7 @@ The following namespaces are used in this ontology:
 @prefix owl: <http://www.w3.org/2002/07/owl> .
 @prefix dc: <http://purl.org/dc/terms/subject> .
 @prefix gndo: <http://d-nb.info/standards/elementset/gnd> .
-@prefix jl: <http://data.judaicalink.org/ontology> .
+@prefix jl: <http://data.judaicalink.org/ontology/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema> .
