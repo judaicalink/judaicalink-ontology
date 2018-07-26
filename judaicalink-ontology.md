@@ -203,38 +203,7 @@ jl:hasPublication
     rdfs:comment "The publications of the person"@en ;
     rdfs:range rdfs:Literal .
 ```
-### jl:hasAbstract
-```
-jl:hasAbstract
-    a rdf:Property ;
-    rdfs:label "has abstract"@en ;
-    rdfs:comment "The abstract of the article in which the concept or the person is described "@en ;
-    rdfs:range rdfs:Literal .
-```
-### skos:altLabel
-```
-skos:altLabel
-    a rdf:Property ;
-    rdfs:label "alternative label"@en ;
-    rdfs:comment "Alternative writing format or language of the preferred label of a person or concept"@en ;
-    rdfs:range rdfs:Literal .
-```
-### skos:prefLabel
-```
-skos:prefLabel
-    a rdf:Property ;
-    rdfs:label "preferred label"@en ;
-    rdfs:comment "The label that is preferred to be used for a person or concept"@en ;
-    rdfs:range rdfs:Literal .
-```
-### owl:sameAs
-```
-owl:sameAs
-    a rdf:Property ;
-    rdfs:label "same as"@en ;
-    rdfs:comment "These constructs may be used to create a number of different names that refer to the same individual"@en ;
-    rdfs:range owl:Thing .
-```
+
 ## Document
 
 Class: foaf:Document
