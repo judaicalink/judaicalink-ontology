@@ -1,8 +1,12 @@
-# Ontology
+## Ontology Documentation
 
 The JudaicaLink Ontology can be obtained via http://ontology.judaicalink.org/
 
-## Namespaces
+This is the main ontology document. All other representations are generated automatically from this document.
+
+- [Turtle](judaicalink-ontology.ttl)
+
+### Namespaces
 The following namespaces are used in this ontology:
 
 ```
@@ -17,12 +21,12 @@ The following namespaces are used in this ontology:
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
 ```
 
-## Concept
+### Concept
 
 Class: skos:Concept
 
 
-### skos:altLabel
+#### skos:altLabel
 ```
 skos:altLabel
     a rdf:Property ;
@@ -30,7 +34,7 @@ skos:altLabel
     rdfs:comment "Alternative writing format or language of the preferred label of a person or concept"@en ;
     rdfs:range rdfs:Literal .
 ```
-### skos:prefLabel
+#### skos:prefLabel
 ```
 skos:prefLabel
     a rdf:Property ;
@@ -38,7 +42,7 @@ skos:prefLabel
     rdfs:comment "The label that is preferred to be used for a person or concept"@en ;
     rdfs:range rdfs:Literal .
 ```
-### skos:related
+#### skos:related
 ```
 skos:related
     a rdf:Property ;
@@ -46,7 +50,7 @@ skos:related
     rdfs:comment "used to assert an associative link between two skos concepts"@en ;
     rdfs:range skos:Concept .
 ```
-### skos:scopeNote
+#### skos:scopeNote
 ```
 skos:scopeNote
     a rdf:Property ;
@@ -54,7 +58,7 @@ skos:scopeNote
     rdfs:comment "Notes are used to provide information relating to skos concepts"@en ;
     rdfs:range rdfs:Literal .
 ```
-### skos:broader
+#### skos:broader
 ```
 skos:broader
     a rdf:Property ;
@@ -62,7 +66,7 @@ skos:broader
     rdfs:comment "used to indicates that one skos concept is in some way more general (broader) than the other"@en  ;
     rdfs:range skos:Concept .
 ```
-### skos:narrower
+#### skos:narrower
 ```
 skos:narrower
     a rdf:Property ;
@@ -71,7 +75,7 @@ skos:narrower
     rdfs:range skos:Concept .
 ```
 
-### foaf:primaryTopic
+#### foaf:primaryTopic
 ```
 foaf:primaryTopic
     a rdf:Property ;
@@ -79,7 +83,7 @@ foaf:primaryTopic
     rdfs:comment "The primary topic of some page or document"@en ;
     rdfs:range owl:Thing .
 ```
-### owl:sameAs
+#### owl:sameAs
 ```
 owl:sameAs
     a rdf:Property ;
@@ -87,7 +91,7 @@ owl:sameAs
     rdfs:comment "These constructs may be used to create a number of different names that refer to the same individual"@en ;
     rdfs:range owl:Thing .
 ```
-### dcterms:identifier
+#### dcterms:identifier
 ```
 dcterms:identifier
     a rdf:Property ;
@@ -95,7 +99,7 @@ dcterms:identifier
     rdfs:comment "An unambiguous reference to the resource within a given context"@en ;
     rdfs:range rdfs:Literal .
 ```
-### dcterms:subject
+#### dcterms:subject
 ```
 dcterms:subject
     a rdf:Property ;
@@ -103,7 +107,7 @@ dcterms:subject
     rdfs:comment "The topic of the resource, category or subject heading that further describes this resource. (broader category used to describe ) "@en ;
     rdfs:range owl:Thing .
 ```
-### jl:describedAt
+#### jl:describedAt
 ```
 jl:describedAt
     a rdf:Property ;
@@ -111,7 +115,7 @@ jl:describedAt
     rdfs:comment "Link to textual resource of encyclopedia article"@en ;
     rdfs:range foaf:Document .
 ```
-### jl:hasAbstract
+#### jl:hasAbstract
 ```
 jl:hasAbstract
     a rdf:Property ;
@@ -119,7 +123,7 @@ jl:hasAbstract
     rdfs:comment "The abstract of the article in which the concept or the person is described "@en ;
     rdfs:range rdfs:Literal .
 ```
-### jl:hasCategory
+#### jl:hasCategory
 ```
 jl:hasCategory
     a rdf:Property ;
@@ -127,7 +131,7 @@ jl:hasCategory
     rdfs:comment "The category to which the concept was assigned to in the original data source"@en ;
     rdfs:range skos:Concept .
 ```
-### jl:referTo
+#### jl:referTo
 ```
 jl:referTo
     a rdf:Property ;
@@ -136,7 +140,7 @@ jl:referTo
     rdfs:range skos:Concept .
 ```
 
-### geo:asWKT
+#### geo:asWKT
 ```
 geo:asWKT
     a rdf:Property ;
@@ -145,11 +149,11 @@ geo:asWKT
     rdfs:range geo:wktLiteral .
 ```
 
-## Person
+### Person
 
 Class: foaf:Person
 
-### gnd:gndIdentifier
+#### gnd:gndIdentifier
 ```
 gndo:gndIdentifier
     a rdf:Property ;
@@ -157,7 +161,7 @@ gndo:gndIdentifier
     rdfs:comment "The identifier of the person or concept in the Integrated Authority File of the German National Library (GND)"@en ;
     rdfs:range rdfs:Literal .
 ```
-### jl:birthDate
+#### jl:birthDate
 ```
 jl:birthDate
     a rdf:Property ;
@@ -165,7 +169,7 @@ jl:birthDate
     rdfs:comment "The date of birth of the person "@en ;
     rdfs:range rdfs:Literal .
 ```
-### jl:deathDate
+#### jl:deathDate
 ```
 jl:deathDate
     a rdf:Property ;
@@ -173,7 +177,7 @@ jl:deathDate
     rdfs:comment "The date of death of the person"@en ;
     rdfs:range rdfs:Literal .
 ```
-### jl:birthLocation 
+#### jl:birthLocation 
 ```
 jl:birthLocation 
     a rdf:Property ;
@@ -181,7 +185,7 @@ jl:birthLocation
     rdfs:comment "The location of birth of the person"@en ;
     rdfs:range rdfs:Literal .
 ```
-### jl:deathLocation 
+#### jl:deathLocation 
 ```
 jl:deathLocation 
     a rdf:Property ;
@@ -189,7 +193,7 @@ jl:deathLocation
     rdfs:comment "The location of death of the person"@en ;
     rdfs:range rdfs:Literal .
 ```
-### jl:occupation
+#### jl:occupation
 ```
 jl:occupation
     a rdf:Property ;
@@ -197,7 +201,7 @@ jl:occupation
     rdfs:comment "The occupation of the person "@en ;
     rdfs:range rdfs:Literal .
 ```
-### jl:hasPublication
+#### jl:hasPublication
 ```
 jl:hasPublication
     a rdf:Property ;
@@ -206,11 +210,11 @@ jl:hasPublication
     rdfs:range rdfs:Literal .
 ```
 
-## Document
+### Document
 
 Class: foaf:Document
 
-### foaf:primaryTopic
+#### foaf:primaryTopic
 ```
 foaf:primaryTopic
     a rdf:Property ;
@@ -218,7 +222,7 @@ foaf:primaryTopic
     rdfs:comment "The primary topic of some page or document"@en ;
     rdfs:range owl:Thing .
 ```
-### rdfs:label
+#### rdfs:label
 ```
 rdfs:label
     a rdf:Property ;
@@ -226,7 +230,7 @@ rdfs:label
     rdfs:comment "used to provide a human-readable version of a resource's name"@en ;
     rdfs:range rdfs:Literal .
 ```
-### dcterms:created
+#### dcterms:created
 ```
 dcterms:created
     a rdf:Property ;
@@ -235,7 +239,7 @@ dcterms:created
     rdfs:range rdfs:Literal .
 ```
 
-## Metadata
+### Metadata
 
 The JudaicaLink ontology is maintained on Github via the following document:
 
