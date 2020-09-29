@@ -1,6 +1,6 @@
 ## Ontology Documentation
 
-The JudaicaLink Ontology can be obtained via http://ontology.judaicalink.org/
+The JudaicaLink Ontology can be obtained via [http://ontology.judaicalink.org/](http://ontology.judaicalink.org)
 
 This is the main ontology document. All other representations are generated automatically from this document.
 
