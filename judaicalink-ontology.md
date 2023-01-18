@@ -243,7 +243,8 @@ dcterms:created
 
 The JudaicaLink ontology is maintained on Github via the following document:
 
-https://github.com/wisslab/judaicalink-ontology/blob/master/judaicalink-ontology.md
+[https://github.com/wisslab/judaicalink-ontology/blob/master/judaicalink-ontology.md](
+https://github.com/wisslab/judaicalink-ontology/blob/master/judaicalink-ontology.md)
 
 You can create comments on the file and/or raise an [issue](https://github.com/wisslab/judaicalink-ontology/issues).
 
