@@ -239,6 +239,68 @@ dcterms:created
     rdfs:range rdfs:Literal .
 ```
 
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix gndo: <http://d-nb.info/standards/elementset/gnd#> .
+@prefix jl: <http://data.judaicalink.org/ontology/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# define the class Annotations
+jl:Annotations a owl:Class ;
+  rdfs:label "Annotations" .
+
+# define the properties of Annotations
+jl:text a owl:DatatypeProperty ;
+  rdfs:label "Text" ;
+  rdfs:domain jl:Annotations ;
+  rdfs:range xsd:string .
+
+jl:uuid a owl:DatatypeProperty ;
+  rdfs:label "UUID" ;
+  rdfs:domain jl:Annotations ;
+  rdfs:range xsd:string .
+
+jl:status a owl:DatatypeProperty ;
+  rdfs:label "Status" ;
+  rdfs:domain jl:Annotations ;
+  rdfs:range xsd:string .
+
+jl:published a owl:DatatypeProperty ;
+  rdfs:label "Published" ;
+  rdfs:domain jl:Annotations ;
+  rdfs:range xsd:boolean .
+
+jl:issue-url a owl:ObjectProperty ;
+  rdfs:label "Issue URL" ;
+  rdfs:domain jl:Annotations ;
+  rdfs:range xsd:anyURI .
+
+jl:tags a owl:DatatypeProperty ;
+  rdfs:label "Tags" ;
+  rdfs:domain jl:Annotations ;
+  rdfs:range rdfs:Literal .
+
+jl:user a owl:DatatypeProperty ;
+  rdfs:label "User" ;
+  rdfs:domain jl:Annotations ;
+  rdfs:range xsd:string .
+
+jl:timestamp a owl:DatatypeProperty ;
+  rdfs:label "Timestamp" ;
+  rdfs:domain jl:Annotations ;
+  rdfs:range xsd:dateTime .
+
+jl:ip a owl:DatatypeProperty ;
+  rdfs:label "IP" ;
+  rdfs:domain jl:Annotations ;
+  rdfs:range xsd:string .
+
+
 ### Metadata
 
 The JudaicaLink ontology is maintained on Github via the following document:
