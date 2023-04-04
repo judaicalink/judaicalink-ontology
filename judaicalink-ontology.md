@@ -243,10 +243,10 @@ dcterms:created
 
 Class:Annotations
 
-#### jl:Annotations
+#### jl:Annotation
 ```
-jl:Annotations a owl:Class ;
-  rdfs:label "Annotations" .
+jl:Annotation a owl:Class ;
+  rdfs:label "Annotation" .
 ```
 
 #### jl:text
@@ -279,7 +279,7 @@ jl:published a owl:DatatypeProperty ;
   rdfs:domain jl:Annotations ;
   rdfs:range xsd:boolean .
 ```
-#### jl:iissue-url
+#### jl:issue-url
 ```
 jl:issue-url a owl:ObjectProperty ;
   rdfs:label "Issue URL" ;
@@ -287,10 +287,10 @@ jl:issue-url a owl:ObjectProperty ;
   rdfs:range xsd:anyURI .
 ```
 
-#### jl:tags
+#### jl:tag
 ```
-jl:tags a owl:DatatypeProperty ;
-  rdfs:label "Tags" ;
+jl:tag a owl:DatatypeProperty ;
+  rdfs:label "Tag" ;
   rdfs:domain jl:Annotations ;
   rdfs:range rdfs:Literal .
 ```
