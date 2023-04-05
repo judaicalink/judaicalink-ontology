@@ -149,6 +149,16 @@ geo:asWKT
     rdfs:range geo:wktLiteral .
 ```
 
+#### jl:hasAnnotation
+```
+jl:hasAnnotation
+    a rdf:Property ;
+    rdfs:label "has annotation"@en ;
+    rdfs:comment "An annotation to the triple"@en ;
+    rdfs:range rdfs:Literal .
+```
+
+
 ### Person
 
 Class: foaf:Person
@@ -237,6 +247,84 @@ dcterms:created
     rdfs:label "created"@en ;
     rdfs:comment "Date of creation of the resource"@en ;
     rdfs:range rdfs:Literal .
+```
+
+### Annotation
+
+Class:Annotations
+
+#### jl:Annotation
+```
+jl:Annotation a owl:Class ;
+  rdfs:label "Annotation" .
+```
+
+#### jl:text
+```
+jl:text a owl:DatatypeProperty ;
+  rdfs:label "Text" ;
+  rdfs:domain jl:Annotations ;
+  rdfs:range xsd:string .
+```
+#### jl:uuid
+```
+jl:uuid a owl:DatatypeProperty ;
+  rdfs:label "UUID" ;
+  rdfs:domain jl:Annotations ;
+  rdfs:range xsd:string .
+```
+
+#### jl:status
+```
+jl:status a owl:DatatypeProperty ;
+  rdfs:label "Status" ;
+  rdfs:domain jl:Annotations ;
+  rdfs:range xsd:string .
+```
+
+#### jl:published
+```
+jl:published a owl:DatatypeProperty ;
+  rdfs:label "Published" ;
+  rdfs:domain jl:Annotations ;
+  rdfs:range xsd:boolean .
+```
+#### jl:issue-url
+```
+jl:issue-url a owl:ObjectProperty ;
+  rdfs:label "Issue URL" ;
+  rdfs:domain jl:Annotations ;
+  rdfs:range xsd:anyURI .
+```
+
+#### jl:tag
+```
+jl:tag a owl:DatatypeProperty ;
+  rdfs:label "Tag" ;
+  rdfs:domain jl:Annotations ;
+  rdfs:range rdfs:Literal .
+```
+
+### jl:user
+```
+jl:user a owl:DatatypeProperty ;
+  rdfs:label "User" ;
+  rdfs:domain jl:Annotations ;
+  rdfs:range xsd:string .
+```
+#### jl:timestamp
+```
+jl:timestamp a owl:DatatypeProperty ;
+  rdfs:label "Timestamp" ;
+  rdfs:domain jl:Annotations ;
+  rdfs:range xsd:dateTime .
+```
+#### jl:ip
+```
+jl:ip a owl:DatatypeProperty ;
+  rdfs:label "IP" ;
+  rdfs:domain jl:Annotations ;
+  rdfs:range xsd:string .
 ```
 
 ### Metadata
