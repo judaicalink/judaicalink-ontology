@@ -305,7 +305,7 @@ jl:tag a owl:DatatypeProperty ;
   rdfs:range rdfs:Literal .
 ```
 
-### jl:user
+#### jl:user
 ```
 jl:user a owl:DatatypeProperty ;
   rdfs:label "User" ;
