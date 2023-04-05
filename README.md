@@ -1,3 +1,5 @@
+[![pages-build-deployment](https://github.com/judaicalink/judaicalink-ontology/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/judaicalink/judaicalink-ontology/actions/workflows/pages/pages-build-deployment)
+
 ## Welcome
 
 Here, you find the JudaicaLink Ontology, i.e., the definitions of the properties and classes used in the [JudaicaLink](http://web.judaicalink.org) project.
