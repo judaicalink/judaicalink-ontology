@@ -149,21 +149,12 @@ geo:asWKT
     rdfs:range geo:wktLiteral .
 ```
 
-#### jl:hasPublication
+#### jl:hasAnnotation
 ```
-jl:hasPublication
+jl:hasAnnotation
     a rdf:Property ;
-    rdfs:label "has publication"@en ;
-    rdfs:comment "The publications of the person"@en ;
-    rdfs:range rdfs:Literal .
-```
-
-#### jl:hasPublication
-```
-jl:hasPublication
-    a rdf:Property ;
-    rdfs:label "has publication"@en ;
-    rdfs:comment "The publications of the person"@en ;
+    rdfs:label "has annotation"@en ;
+    rdfs:comment "An annotation to the triple"@en ;
     rdfs:range rdfs:Literal .
 ```
 
