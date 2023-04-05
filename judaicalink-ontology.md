@@ -158,6 +158,16 @@ jl:hasPublication
     rdfs:range rdfs:Literal .
 ```
 
+#### jl:hasPublication
+```
+jl:hasPublication
+    a rdf:Property ;
+    rdfs:label "has publication"@en ;
+    rdfs:comment "The publications of the person"@en ;
+    rdfs:range rdfs:Literal .
+```
+
+
 ### Person
 
 Class: foaf:Person
