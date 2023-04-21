@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: '3.9'
 
@@ -25,6 +25,8 @@ jobs:
       - name: Generate ontology
         run: |
           python generate.py
+          git config --global user.email "b.schnabel@hs-mannheim.de"
+          git config --global user.name "Benjamin Schnabel"
           git add .
           git commit -m "judaicalink-ontology.ttl file updated."
           git push
