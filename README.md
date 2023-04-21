@@ -1,4 +1,5 @@
 [![pages-build-deployment](https://github.com/judaicalink/judaicalink-ontology/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/judaicalink/judaicalink-ontology/actions/workflows/pages/pages-build-deployment)
+[![Generate Ontology](https://github.com/judaicalink/judaicalink-ontology/actions/workflows/generate.yml/badge.svg)](https://github.com/judaicalink/judaicalink-ontology/actions/workflows/generate.yml)
 
 ## Welcome
 
