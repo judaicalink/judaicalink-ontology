@@ -23,4 +23,4 @@ jobs:
           python -m pip install --upgrade pip
 
       - name: Generate ontology
-        run: python generate.py > judaicalink-ontology.ttl
+        run: python generate.py
