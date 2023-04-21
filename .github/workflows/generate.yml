@@ -28,5 +28,5 @@ jobs:
           git config --global user.email "b.schnabel@hs-mannheim.de"
           git config --global user.name "Benjamin Schnabel"
           git add .
-          git commit -m "judaicalink-ontology.ttl file updated."
-          git push -f origin master
+          git commit -m "judaicalink-ontology.ttl file updated." --allow-emtpy
+          git push
