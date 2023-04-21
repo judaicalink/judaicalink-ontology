@@ -23,4 +23,8 @@ jobs:
           python -m pip install --upgrade pip
 
       - name: Generate ontology
-        run: python generate.py
+        run: |
+          python generate.py
+          git add .
+          git commit -m "judaicalink-ontology.ttl file updated."
+          git push
