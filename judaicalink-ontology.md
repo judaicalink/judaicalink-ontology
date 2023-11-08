@@ -327,6 +327,67 @@ jl:ip a owl:DatatypeProperty ;
   rdfs:range xsd:string .
 ```
 
+### Dataset
+
+Class: jl:Dataset
+
+#### jl:datasetName
+```
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Dataset Name" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+```
+
+#### jl:createdAt
+```
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Created at" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:xsdDate .
+```
+
+#### jl:hasCreatorName
+```
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Creator Name" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+```
+
+#### jl:hasCreatorEmail
+```
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Creator Email" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+```
+
+#### jl:hasDescription
+```
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Description" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+```
+
+#### jl:hasSlug
+```
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Slug" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+```
+
+#### jl:hasSource
+```
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Source URI" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:URI .
+```
+
+
 ### Metadata
 
 The JudaicaLink ontology is maintained on Github via the following document:
