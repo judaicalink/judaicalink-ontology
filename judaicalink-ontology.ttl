@@ -175,3 +175,59 @@ jl:ip a owl:DatatypeProperty ;
   rdfs:label "IP" ;
   rdfs:domain jl:Annotations ;
   rdfs:range xsd:string .
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Desciption for the Dataset" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "The files for the Dataset" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Title of the Dataset" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Created at" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:xsdDate .
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Creator Name" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Creator Email" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Description" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Slug" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Graph" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Is loaded" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Boolean .
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Category" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Exmaple URI" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:URI .
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "License" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Source URI" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:URI .
