@@ -327,6 +327,130 @@ jl:ip a owl:DatatypeProperty ;
   rdfs:range xsd:string .
 ```
 
+### Dataset
+
+Class: jl:Dataset
+
+#### jl:hasDescription
+```
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Desciption for the Dataset" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+```
+
+#### jl:hasFiles
+
+```
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "The files for the Dataset" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+```
+
+#### jl:hasTitle
+
+```
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Title of the Dataset" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+```
+
+#### jl:createdAt
+```
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Created at" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:xsdDate .
+```
+
+#### jl:hasAuthor
+```
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Creator Name" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+```
+
+#### jl:hasAuthorEmail
+```
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Creator Email" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+```
+
+#### jl:hasAuthorlink
+
+
+#### jl:hasDescription
+```
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Description" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+```
+
+#### jl:hasSlug
+```
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Slug" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+```
+
+
+#### jl:hasGraph
+```
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Graph" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+```
+
+#### jl:isLoaded
+```
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Is loaded" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Boolean .
+```
+
+#### jl:hasCategory
+```
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Category" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+```
+#### jl:hasExample
+
+```
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Exmaple URI" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:URI .
+```
+
+#### jl:hasLicense
+
+```
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "License" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:Literal .
+```
+
+#### jl:hasSource
+```
+jl:datasetName a owl:DatatypeProperty ;
+    rdfs:label "Source URI" ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range rdfs:URI .
+```
+
+
 ### Metadata
 
 The JudaicaLink ontology is maintained on Github via the following document:
