@@ -450,6 +450,36 @@ jl:datasetName a owl:DatatypeProperty ;
     rdfs:range rdfs:URI .
 ```
 
+### Journal
+```
+    
+```
+
+
+### Issue
+##### jl:hasVisualRepresentation
+
+### Page
+
+#### jl:belongsToIssue
+
+#### jl:belongsToJournal
+
+#### jl:title
+#### jl:hasVisualRepresentation
+
+
+#### Resource
+jl.hasReference
+
+### Reference
+RDF.type
+jl.isOnPage
+jl.hasSpot
+jl.hasStart
+jl.hasEnd
+jl.hasLinkProb
+jl.hasRho
 
 ### Metadata
 
