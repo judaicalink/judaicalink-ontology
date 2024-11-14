@@ -10,6 +10,7 @@ This is the main ontology document. All other representations are generated auto
 The following namespaces are used in this ontology:
 
 ```
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
