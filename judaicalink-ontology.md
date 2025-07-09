@@ -456,8 +456,8 @@ jl:datasetName a owl:DatatypeProperty ;
 
 The JudaicaLink ontology is maintained on Github via the following document:
 
-[https://github.com/wisslab/judaicalink-ontology/blob/master/judaicalink-ontology.md](
-https://github.com/wisslab/judaicalink-ontology/blob/master/judaicalink-ontology.md)
+[https://github.com/judaicalink/judaicalink-ontology/blob/master/judaicalink-ontology.md](
+https://github.com/judaicalink/judaicalink-ontology/blob/master/judaicalink-ontology.md)
 
-You can create comments on the file and/or raise an [issue](https://github.com/wisslab/judaicalink-ontology/issues).
+You can create comments on the file and/or raise an [issue](https://github.com/judaicalink/judaicalink-ontology/issues).
 
