@@ -159,6 +159,15 @@ jl:hasAnnotation
     rdfs:range rdfs:Literal .
 ```
 
+### jl:represents
+```
+jl:represents
+    a rdf:Property ;
+    rdfs:label "represents"@en ;
+    rdfs:comment "Indicates that a resource represents, depicts, or stands for another entity. Used especially for images, digital objects, or abstract identifiers that refer to persons, places, works, or events."@en ;
+    rdfs:range jl:Resource .
+```
+
 
 ### Person
 
@@ -383,6 +392,13 @@ jl:datasetName a owl:DatatypeProperty ;
 ```
 
 #### jl:hasAuthorlink
+```
+jl:hasAuthorlink a owl:ObjectProperty ;
+    rdfs:label "hasAuthorLink" ;
+    rdfs:comment "Link to an external author page or authority record (e.g. ORCID, GND, VIAF, university profile)."@en ;
+    rdfs:domain jl:Resource ;
+    rdfs:range rdfs:Resource .
+```
 
 
 #### jl:hasDescription
