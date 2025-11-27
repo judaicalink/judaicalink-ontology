@@ -1,0 +1,33 @@
+name: Generate Ontology
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+
+      - name: Generate ontology
+        run: |
+          python generate.py
+          git config --global user.email "b.schnabel@hs-mannheim.de"
+          git config --global user.name "Benjamin Schnabel"
+          git add .
+          git diff-index --quiet HEAD || git commit -m "judaicalink-ontology.ttl file updated" -a
+          git push
+        if: ${{ github.event_name == 'push' && steps.generate.outputs.exit-code == 0 }}
