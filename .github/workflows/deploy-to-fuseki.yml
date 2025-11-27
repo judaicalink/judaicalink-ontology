@@ -1,0 +1,52 @@
+name: Generate and deploy ontology to Fuseki
+
+on:
+  push:
+    branches: [ master ]
+    # Only run when ontology / generator changes (adjust as you like)
+    paths:
+      - "judaicalink-ontology.md"
+      - "generate.py"
+      - ".github/workflows/deploy-to-fuseki.yml"
+      - "load_to_fuseki.sh"
+  workflow_dispatch: {}  # manual trigger from Actions tab
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      FUSEKI_URL: ${{ secrets.FUSEKI_URL }}
+      FUSEKI_USER: ${{ secrets.FUSEKI_USER }}
+      FUSEKI_PASSWORD: ${{ secrets.FUSEKI_PASSWORD }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # If you later add requirements.txt, this will pick it up automatically
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          fi
+
+      - name: Generate TTL from markdown
+        run: |
+          echo "Generating judaicalink-ontology.ttl from judaicalink-ontology.md"
+          python generate.py
+
+      - name: Check generated TTL file
+        run: |
+          ls -lh judaicalink-ontology.ttl
+          head -n 20 judaicalink-ontology.ttl || true
+
+      - name: Upload TTL to Fuseki
+        run: |
+          bash ./loader.sh judaicalink-ontology.ttl
