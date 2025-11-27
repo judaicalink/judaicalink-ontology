@@ -75,7 +75,6 @@ skos:narrower
     rdfs:comment "used to indicates that one skos concept is in some way less general (narrower) than the other"@en ;
     rdfs:range skos:Concept .
 ```
-
 #### foaf:primaryTopic
 ```
 foaf:primaryTopic
@@ -140,7 +139,6 @@ jl:referTo
     rdfs:comment "Used for redirection of one concept to another concept mostly in encyclopedias (when there is a name change or other reasons)"@en ;
     rdfs:range skos:Concept .
 ```
-
 #### geo:asWKT
 ```
 geo:asWKT
@@ -149,7 +147,22 @@ geo:asWKT
     rdfs:comment "The WKT serialization of a geometry"@en ;
     rdfs:range geo:wktLiteral .
 ```
-
+#### jl:lat
+```
+jl:lat
+    a rdf:Property ;
+    rdfs:label "latitude"@en ;
+    rdfs:comment "Latitude of a place or resource, in decimal degrees."@en ;
+    rdfs:range xsd:decimal .
+```
+#### jl:lon
+```
+jl:lon
+    a rdf:Property ;
+    rdfs:label "longitude"@en ;
+    rdfs:comment "Longitude of a place or resource, in decimal degrees."@en ;
+    rdfs:range xsd:decimal .
+```
 #### jl:hasAnnotation
 ```
 jl:hasAnnotation
@@ -158,7 +171,6 @@ jl:hasAnnotation
     rdfs:comment "An annotation to the triple"@en ;
     rdfs:range rdfs:Literal .
 ```
-
 ### jl:represents
 ```
 jl:represents
@@ -189,6 +201,14 @@ jl:birthDate
     rdfs:comment "The date of birth of the person "@en ;
     rdfs:range rdfs:Literal .
 ```
+#### jl:birthYear
+```
+jl:birthYear
+    a rdf:Property ;
+    rdfs:label "birth year"@en ;
+    rdfs:comment "The year of birth of the person."@en ;
+    rdfs:range xsd:gYear .
+```
 #### jl:deathDate
 ```
 jl:deathDate
@@ -196,6 +216,14 @@ jl:deathDate
     rdfs:label "death date"@en ;
     rdfs:comment "The date of death of the person"@en ;
     rdfs:range rdfs:Literal .
+```
+#### jl:deathYear
+```
+jl:deathYear
+    a rdf:Property ;
+    rdfs:label "death year"@en ;
+    rdfs:comment "The year of death of the person."@en ;
+    rdfs:range xsd:gYear .
 ```
 #### jl:birthLocation 
 ```
@@ -205,6 +233,14 @@ jl:birthLocation
     rdfs:comment "The location of birth of the person"@en ;
     rdfs:range rdfs:Literal .
 ```
+#### jl:birthLocationURI
+```
+jl:birthLocationURI
+    a rdf:Property ;
+    rdfs:label "birth location URI"@en ;
+    rdfs:comment "URI of the place of birth of the person."@en ;
+    rdfs:range rdfs:Resource .
+```
 #### jl:deathLocation 
 ```
 jl:deathLocation 
@@ -212,6 +248,14 @@ jl:deathLocation
     rdfs:label "death location"@en ;
     rdfs:comment "The location of death of the person"@en ;
     rdfs:range rdfs:Literal .
+```
+#### jl:deathLocationURI
+```
+jl:deathLocationURI
+    a rdf:Property ;
+    rdfs:label "death location URI"@en ;
+    rdfs:comment "URI of the place of death of the person."@en ;
+    rdfs:range rdfs:Resource .
 ```
 #### jl:occupation
 ```
@@ -234,6 +278,14 @@ jl:hasPublication
 
 Class: foaf:Document
 
+#### jl:title
+```
+jl:title
+    a rdf:Property ;
+    rdfs:label "title"@en ;
+    rdfs:comment "Title of a resource, such as a document, work, or dataset."@en ;
+    rdfs:range rdfs:Literal .
+```
 #### foaf:primaryTopic
 ```
 foaf:primaryTopic
@@ -258,6 +310,48 @@ dcterms:created
     rdfs:comment "Date of creation of the resource"@en ;
     rdfs:range rdfs:Literal .
 ```
+#### jl:belongsToJournal
+```
+jl:belongsToJournal
+    a rdf:Property ;
+    rdfs:label "belongs to journal"@en ;
+    rdfs:comment "Links a publication or article to the journal in which it was published."@en ;
+    rdfs:range jl:Resource .
+```
+
+#### jl:BleongsToIssue
+```
+jl:belongsToIssue
+    a rdf:Property ;
+    rdfs:label "belongs to issue"@en ;
+    rdfs:comment "Links a publication or article to the specific journal issue in which it was published."@en ;
+    rdfs:range jl:Resource .
+```
+
+#### jl:hasReference
+```
+jl:hasReference
+    a rdf:Property ;
+    rdfs:label "has reference"@en ;
+    rdfs:comment "Reference or citation associated with a resource (e.g. bibliographic reference in an article)."@en ;
+    rdfs:range rdfs:Literal .
+```
+#### jl:isOnPage
+```
+jl:isOnPage
+    a rdf:Property ;
+    rdfs:label "is on page"@en ;
+    rdfs:comment "Page or page range on which the resource (e.g. an article or reference) appears."@en ;
+    rdfs:range rdfs:Literal .
+```
+#### jl:hasVisualRepresentation
+```
+jl:hasVisualRepresentation
+    a rdf:Property ;
+    rdfs:label "has visual representation"@en ;
+    rdfs:comment "Links a resource to a visual representation such as an image or illustration."@en ;
+    rdfs:range jl:Resource .
+```
 
 ### Annotation
 
@@ -268,7 +362,6 @@ Class:Annotations
 jl:Annotation a owl:Class ;
   rdfs:label "Annotation" .
 ```
-
 #### jl:text
 ```
 jl:text a owl:DatatypeProperty ;
@@ -283,7 +376,6 @@ jl:uuid a owl:DatatypeProperty ;
   rdfs:domain jl:Annotations ;
   rdfs:range xsd:string .
 ```
-
 #### jl:status
 ```
 jl:status a owl:DatatypeProperty ;
@@ -291,7 +383,6 @@ jl:status a owl:DatatypeProperty ;
   rdfs:domain jl:Annotations ;
   rdfs:range xsd:string .
 ```
-
 #### jl:published
 ```
 jl:published a owl:DatatypeProperty ;
@@ -314,7 +405,6 @@ jl:tag a owl:DatatypeProperty ;
   rdfs:domain jl:Annotations ;
   rdfs:range rdfs:Literal .
 ```
-
 #### jl:user
 ```
 jl:user a owl:DatatypeProperty ;
@@ -348,25 +438,22 @@ jl:datasetName a owl:DatatypeProperty ;
     rdfs:domain jl:Dataset ;
     rdfs:range rdfs:Literal .
 ```
-
 #### jl:hasFiles
-
 ```
 jl:datasetName a owl:DatatypeProperty ;
     rdfs:label "The files for the Dataset" ;
     rdfs:domain jl:Dataset ;
     rdfs:range rdfs:Literal .
 ```
-
 #### jl:hasTitle
-
 ```
-jl:datasetName a owl:DatatypeProperty ;
-    rdfs:label "Title of the Dataset" ;
+jl:hasTitle
+    a owl:DatatypeProperty ;
+    rdfs:label "title of the dataset"@en ;
+    rdfs:comment "The human-readable title of the dataset."@en ;
     rdfs:domain jl:Dataset ;
     rdfs:range rdfs:Literal .
 ```
-
 #### jl:createdAt
 ```
 jl:datasetName a owl:DatatypeProperty ;
@@ -374,7 +461,6 @@ jl:datasetName a owl:DatatypeProperty ;
     rdfs:domain jl:Dataset ;
     rdfs:range rdfs:xsdDate .
 ```
-
 #### jl:hasAuthor
 ```
 jl:datasetName a owl:DatatypeProperty ;
@@ -382,7 +468,6 @@ jl:datasetName a owl:DatatypeProperty ;
     rdfs:domain jl:Dataset ;
     rdfs:range rdfs:Literal .
 ```
-
 #### jl:hasAuthorEmail
 ```
 jl:datasetName a owl:DatatypeProperty ;
@@ -390,7 +475,6 @@ jl:datasetName a owl:DatatypeProperty ;
     rdfs:domain jl:Dataset ;
     rdfs:range rdfs:Literal .
 ```
-
 #### jl:hasAuthorlink
 ```
 jl:hasAuthorlink a owl:ObjectProperty ;
@@ -399,8 +483,6 @@ jl:hasAuthorlink a owl:ObjectProperty ;
     rdfs:domain jl:Resource ;
     rdfs:range rdfs:Resource .
 ```
-
-
 #### jl:hasDescription
 ```
 jl:datasetName a owl:DatatypeProperty ;
@@ -408,7 +490,6 @@ jl:datasetName a owl:DatatypeProperty ;
     rdfs:domain jl:Dataset ;
     rdfs:range rdfs:Literal .
 ```
-
 #### jl:hasSlug
 ```
 jl:datasetName a owl:DatatypeProperty ;
@@ -416,8 +497,6 @@ jl:datasetName a owl:DatatypeProperty ;
     rdfs:domain jl:Dataset ;
     rdfs:range rdfs:Literal .
 ```
-
-
 #### jl:hasGraph
 ```
 jl:datasetName a owl:DatatypeProperty ;
@@ -425,7 +504,6 @@ jl:datasetName a owl:DatatypeProperty ;
     rdfs:domain jl:Dataset ;
     rdfs:range rdfs:Literal .
 ```
-
 #### jl:isLoaded
 ```
 jl:datasetName a owl:DatatypeProperty ;
@@ -433,7 +511,6 @@ jl:datasetName a owl:DatatypeProperty ;
     rdfs:domain jl:Dataset ;
     rdfs:range rdfs:Boolean .
 ```
-
 #### jl:hasCategory
 ```
 jl:datasetName a owl:DatatypeProperty ;
@@ -442,29 +519,95 @@ jl:datasetName a owl:DatatypeProperty ;
     rdfs:range rdfs:Literal .
 ```
 #### jl:hasExample
-
 ```
 jl:datasetName a owl:DatatypeProperty ;
     rdfs:label "Exmaple URI" ;
     rdfs:domain jl:Dataset ;
     rdfs:range rdfs:URI .
 ```
-
 #### jl:hasLicense
-
 ```
 jl:datasetName a owl:DatatypeProperty ;
     rdfs:label "License" ;
     rdfs:domain jl:Dataset ;
     rdfs:range rdfs:Literal .
 ```
-
 #### jl:hasSource
 ```
 jl:datasetName a owl:DatatypeProperty ;
     rdfs:label "Source URI" ;
     rdfs:domain jl:Dataset ;
     rdfs:range rdfs:URI .
+```
+#### jl:gitCommit
+```
+jl:gitCommit
+    a owl:DatatypeProperty ;
+    rdfs:label "git commit"@en ;
+    rdfs:comment "Identifier of the Git commit from which this dataset or resource was generated."@en ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range xsd:string .
+```
+#### jl:gitWeb
+```
+jl:gitWeb
+    a owl:DatatypeProperty ;
+    rdfs:label "Git web URL"@en ;
+    rdfs:comment "Web URL of the Git repository or specific commit associated with this dataset or resource."@en ;
+    rdfs:domain jl:Dataset ;
+    rdfs:range xsd:anyURI .
+```
+### NLPAnnotation
+Class: jl:NLPAnnotation
+
+#### jl:NLPAnnotation
+```
+jl:NLPAnnotation a owl:Class ;
+    rdfs:label "NLP Annotation"@en ;
+    rdfs:comment "Annotation generated by an NLP tool (e.g. entity linking, text span detection, confidence scores)."@en .
+```
+
+#### jl:hasSpot
+```
+jl:hasSpot
+    a rdf:Property ;
+    rdfs:label "has spot"@en ;
+    rdfs:comment "Surface form (text span) in the source text that has been annotated."@en ;
+    rdfs:range rdfs:Literal .
+```
+
+#### jl:hasStart
+```
+jl:hasStart
+    a rdf:Property ;
+    rdfs:label "has start offset"@en ;
+    rdfs:comment "Start character offset of the annotated span in the source text."@en ;
+    rdfs:range xsd:integer .
+```
+
+#### jl:hasEnd
+```
+jl:hasEnd
+    a rdf:Property ;
+    rdfs:label "has end offset"@en ;
+    rdfs:comment "End character offset of the annotated span in the source text."@en ;
+    rdfs:range xsd:integer .
+```
+#### jl:hasRho
+```
+jl:hasRho
+    a rdf:Property ;
+    rdfs:label "has rho"@en ;
+    rdfs:comment "Confidence or relevance score (rho) of the annotation, as provided by the NLP tool."@en ;
+    rdfs:range xsd:decimal .
+```
+#### jl:hasLinkProb
+```
+jl:hasLinkProb
+    a rdf:Property ;
+    rdfs:label "has link probability"@en ;
+    rdfs:comment "Link probability or prior probability that the spotted text refers to the linked entity."@en ;
+    rdfs:range xsd:decimal .
 ```
 
 
