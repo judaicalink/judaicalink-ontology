@@ -323,6 +323,49 @@ jl:deathYear
     rdfs:comment "The year of death of the person."@en ;
     rdfs:range xsd:gYear .
 ```
+Normalised dates: `jl:birthDate` and `jl:deathDate` are free text as given by the sources. A complementary dataset
+(records-normalized) adds typed values next to them, so that dates can be compared and sorted; the original values
+stay. Example (a record of djh):
+
+    <http://data.judaicalink.org/data/djh/abudiente-mose-gideon>
+        jl:birthDate "ca. 1610" ;
+        jl:birthDateNormalized "1610"^^xsd:gYear ;
+        jl:birthDateUncertain "true"^^xsd:boolean ;
+        jl:deathDate "4.3.1688" ;
+        jl:deathDateNormalized "1688-03-04"^^xsd:date .
+
+#### jl:birthDateNormalized
+```
+jl:birthDateNormalized
+    a rdf:Property ;
+    rdfs:label "normalised birth date"@en ;
+    rdfs:comment "The birth date of the person as xsd:date, xsd:gYearMonth or xsd:gYear, derived from the free text of jl:birthDate, which stays as it is."@en ;
+    rdfs:range rdfs:Literal .
+```
+#### jl:birthDateUncertain
+```
+jl:birthDateUncertain
+    a rdf:Property ;
+    rdfs:label "birth date uncertain"@en ;
+    rdfs:comment "True if the source marks the birth date as uncertain or approximate (e.g. ca., ?) or if it was converted from a Hebrew year, which spans two Gregorian years."@en ;
+    rdfs:range xsd:boolean .
+```
+#### jl:deathDateNormalized
+```
+jl:deathDateNormalized
+    a rdf:Property ;
+    rdfs:label "normalised death date"@en ;
+    rdfs:comment "The death date of the person as xsd:date, xsd:gYearMonth or xsd:gYear, derived from the free text of jl:deathDate, which stays as it is."@en ;
+    rdfs:range rdfs:Literal .
+```
+#### jl:deathDateUncertain
+```
+jl:deathDateUncertain
+    a rdf:Property ;
+    rdfs:label "death date uncertain"@en ;
+    rdfs:comment "True if the source marks the death date as uncertain or approximate (e.g. ca., ?) or if it was converted from a Hebrew year, which spans two Gregorian years."@en ;
+    rdfs:range xsd:boolean .
+```
 #### jl:birthLocation 
 ```
 jl:birthLocation 
@@ -362,6 +405,14 @@ jl:occupation
     rdfs:label "occupation"@en ;
     rdfs:comment "The occupation of the person "@en ;
     rdfs:range rdfs:Literal .
+```
+#### jl:occupationURI
+```
+jl:occupationURI
+    a rdf:Property ;
+    rdfs:label "occupation URI"@en ;
+    rdfs:comment "The occupation of the person as an IRI, e.g. an occupation concept; jl:occupation is the occupation as text (as jl:birthLocationURI is the place of birth as an IRI next to jl:birthLocation)."@en ;
+    rdfs:range rdfs:Resource .
 ```
 #### jl:hasPublication
 ```
