@@ -171,13 +171,111 @@ jl:hasAnnotation
     rdfs:comment "An annotation to the triple"@en ;
     rdfs:range rdfs:Literal .
 ```
-### jl:represents
+### Entity pages
+
+Class: jl:EntityPage
+
+An entity page is the JudaicaLink resource for one person, place, organisation, work or subject: it brings together
+the records that the datasets have about it (`jl:represents`) and repeats their main facts (names, dates, places,
+identifiers), chosen by a fixed precedence of the datasets. Entity pages are made by the dataset `ep`, one version at a
+time; their IRIs (`http://data.judaicalink.org/data/ep/<number>`) stay stable from version to version. When the
+records show that two entity pages stand for the same entity, one is merged into the other (`jl:mergedInto`, the older
+IRI is kept); when they show that an entity page stood for several entities, it is split (`jl:splitInto`); an entity
+page that no longer stands for a person, place, organisation, work or subject is retired (`jl:retiredDate`). Each of
+these is stated once, with the date of the version that made the change; an IRI is never used again. Example (from
+the version 2026-10-12 of `ep`): the entity page of 2021 for Marseille also held a person of the Russian Jewish
+Encyclopedia, the composer Paul Marselle, linked to the city by his name; it was split into a page for the city and
+one for the composer. The GND record of Johanan ben Zakkai had a page of its own; it was merged into his page.
+
+    <http://data.judaicalink.org/data/ep/1686052>
+        a jl:EntityPage, jl:Place ;
+        skos:prefLabel "Marseille" ;
+        jl:represents <http://data.judaicalink.org/data/dbpedia/Marseille>, <http://data.judaicalink.org/data/geo-coordinates/Marseille> .
+
+    <http://data.judaicalink.org/data/ep/2779279>
+        a jl:EntityPage, foaf:Person ;
+        jl:represents <http://data.judaicalink.org/data/rujen/marselj> .
+
+    <http://data.judaicalink.org/data/ep/1000242>
+        jl:splitInto <http://data.judaicalink.org/data/ep/1686052>, <http://data.judaicalink.org/data/ep/2779279> ;
+        jl:splitDate "2026-10-12"^^xsd:date .
+
+    <http://data.judaicalink.org/data/ep/1009940>
+        jl:mergedInto <http://data.judaicalink.org/data/ep/1005344> ;
+        jl:mergeDate "2026-10-12"^^xsd:date .
+
+#### jl:EntityPage
+```
+jl:EntityPage a owl:Class ;
+    rdfs:label "entity page"@en ;
+    rdfs:comment "The JudaicaLink resource for one person, place, organisation, work or subject, which brings together the records of the datasets about it (jl:represents). Its IRI stays stable; a page that turns out to be the same as another is merged into it (jl:mergedInto), one that turns out to stand for several entities is split (jl:splitInto), one that no longer stands for an entity is retired (jl:retiredDate)."@en .
+```
+#### jl:Place
+```
+jl:Place a owl:Class ;
+    rdfs:label "place"@en ;
+    rdfs:comment "A place: a settlement, region, country or other geographic entity. Used for records and entity pages."@en .
+```
+#### jl:Work
+```
+jl:Work a owl:Class ;
+    rdfs:label "work"@en ;
+    rdfs:comment "A work: a text, composition or other creation, as described by a record (e.g. a name-title authority record). Used for records and entity pages."@en .
+```
+#### jl:Subject
+```
+jl:Subject a owl:Class ;
+    rdfs:label "subject"@en ;
+    rdfs:comment "A subject: a topic or concept that is the entity of an entity page, e.g. described by an article of an encyclopedia."@en .
+```
+#### jl:represents
 ```
 jl:represents
     a rdf:Property ;
     rdfs:label "represents"@en ;
-    rdfs:comment "Indicates that a resource represents, depicts, or stands for another entity. Used especially for images, digital objects, or abstract identifiers that refer to persons, places, works, or events."@en ;
+    rdfs:comment "A record of a dataset that the entity page brings together. All records that an entity page represents describe the same entity; the facts on the page are chosen from them."@en ;
+    rdfs:domain jl:EntityPage ;
     rdfs:range jl:Resource .
+```
+#### jl:mergedInto
+```
+jl:mergedInto
+    a rdf:Property ;
+    rdfs:label "merged into"@en ;
+    rdfs:comment "The entity page into which this former entity page was merged. Both stand for the same entity, so this IRI can be redirected to it; chains of merges are followed. Stated with jl:mergeDate."@en ;
+    rdfs:range jl:EntityPage .
+```
+#### jl:mergeDate
+```
+jl:mergeDate
+    a rdf:Property ;
+    rdfs:label "merge date"@en ;
+    rdfs:comment "The date of the version of the entity pages in which this entity page was merged into another (jl:mergedInto)."@en ;
+    rdfs:range xsd:date .
+```
+#### jl:splitInto
+```
+jl:splitInto
+    a rdf:Property ;
+    rdfs:label "split into"@en ;
+    rdfs:comment "An entity page into which this former entity page was split: it turned out to stand for several entities, which were not known to be different when it was made. Each part has its own entity page (one statement per part); the IRI is not redirected, as it has several targets. Stated with jl:splitDate."@en ;
+    rdfs:range jl:EntityPage .
+```
+#### jl:splitDate
+```
+jl:splitDate
+    a rdf:Property ;
+    rdfs:label "split date"@en ;
+    rdfs:comment "The date of the version of the entity pages in which this entity page was split (jl:splitInto)."@en ;
+    rdfs:range xsd:date .
+```
+#### jl:retiredDate
+```
+jl:retiredDate
+    a rdf:Property ;
+    rdfs:label "retired date"@en ;
+    rdfs:comment "The date of the version of the entity pages from which this IRI is no longer an entity page, because its records are not persons, places, organisations, works or subjects (e.g. a mention or a page of a journal). The IRI stays resolvable and is never used again."@en ;
+    rdfs:range xsd:date .
 ```
 
 
