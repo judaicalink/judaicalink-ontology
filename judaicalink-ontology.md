@@ -522,6 +522,46 @@ jl:Journal a owl:Class ;
     rdfs:label "Journal"@en ;
     rdfs:comment "A scholarly or academic journal in which publications or articles appear."@en .
 ```
+#### jl:subtitle
+```
+jl:subtitle
+    a rdf:Property ;
+    rdfs:label "subtitle"@en ;
+    rdfs:comment "Subtitle of a journal."@en ;
+    rdfs:range rdfs:Literal .
+```
+#### jl:placeOfPublication
+```
+jl:placeOfPublication
+    a rdf:Property ;
+    rdfs:label "place of publication"@en ;
+    rdfs:comment "Place where a journal was published, as given by the library (text)."@en ;
+    rdfs:range rdfs:Literal .
+```
+#### jl:publicationPeriod
+```
+jl:publicationPeriod
+    a rdf:Property ;
+    rdfs:label "publication period"@en ;
+    rdfs:comment "Publication period of a journal as free text, as given by the library."@en ;
+    rdfs:range rdfs:Literal .
+```
+#### jl:indexedPages
+```
+jl:indexedPages
+    a rdf:Property ;
+    rdfs:label "indexed pages"@en ;
+    rdfs:comment "Number of pages of a journal in the Compact Memory full-text index."@en ;
+    rdfs:range xsd:integer .
+```
+#### jl:meanOcrKnownWordShare
+```
+jl:meanOcrKnownWordShare
+    a rdf:Property ;
+    rdfs:label "mean OCR known-word share"@en ;
+    rdfs:comment "Mean of jl:ocrKnownWordShare over the pages of a journal."@en ;
+    rdfs:range xsd:decimal .
+```
 ### Issue
 Class: jl:Issue
 #### jl:Issue
@@ -578,6 +618,22 @@ jl:hasVisualRepresentation
     rdfs:comment "Links a resource to a visual representation such as an image or illustration."@en ;
     rdfs:range jl:Resource .
 ```
+#### jl:pageSequence
+```
+jl:pageSequence
+    a rdf:Property ;
+    rdfs:label "page sequence"@en ;
+    rdfs:comment "Position of a page within its issue or volume in the Visual Library of UB Frankfurt."@en ;
+    rdfs:range xsd:integer .
+```
+#### jl:ocrKnownWordShare
+```
+jl:ocrKnownWordShare
+    a rdf:Property ;
+    rdfs:label "OCR known-word share"@en ;
+    rdfs:comment "Share of the words of a page that are found in a word list derived from the corpus; an estimate of the OCR quality."@en ;
+    rdfs:range xsd:decimal .
+```
 
 ### Resource
 Class: jl:Resource
@@ -594,6 +650,54 @@ jl:hasReference
     rdfs:label "has reference"@en ;
     rdfs:comment "Reference or citation associated with a resource (e.g. bibliographic reference in an article)."@en ;
     rdfs:range rdfs:Literal .
+```
+#### jl:cmMentionCount
+```
+jl:cmMentionCount
+    a rdf:Property ;
+    rdfs:label "Compact Memory mentions"@en ;
+    rdfs:comment "Number of mentions of the resource in Compact Memory."@en ;
+    rdfs:range xsd:integer .
+```
+#### jl:cmPageCount
+```
+jl:cmPageCount
+    a rdf:Property ;
+    rdfs:label "Compact Memory pages"@en ;
+    rdfs:comment "Number of Compact Memory pages that mention the resource."@en ;
+    rdfs:range xsd:integer .
+```
+#### jl:cmJournalCount
+```
+jl:cmJournalCount
+    a rdf:Property ;
+    rdfs:label "Compact Memory journals"@en ;
+    rdfs:comment "Number of Compact Memory journals that mention the resource."@en ;
+    rdfs:range xsd:integer .
+```
+#### jl:cmFirstYear
+```
+jl:cmFirstYear
+    a rdf:Property ;
+    rdfs:label "first year in Compact Memory"@en ;
+    rdfs:comment "Year of the earliest Compact Memory page that mentions the resource."@en ;
+    rdfs:range xsd:gYear .
+```
+#### jl:cmLastYear
+```
+jl:cmLastYear
+    a rdf:Property ;
+    rdfs:label "last year in Compact Memory"@en ;
+    rdfs:comment "Year of the latest Compact Memory page that mentions the resource."@en ;
+    rdfs:range xsd:gYear .
+```
+#### jl:cmMostFrequentJournal
+```
+jl:cmMostFrequentJournal
+    a rdf:Property ;
+    rdfs:label "most frequent journal"@en ;
+    rdfs:comment "The Compact Memory journal with the most mentions of the resource."@en ;
+    rdfs:range jl:Resource .
 ```
 ### Reference
 Class: jl:Reference
