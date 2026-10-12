@@ -190,14 +190,14 @@ one for the composer. The GND record of Johanan ben Zakkai had a page of its own
     <http://data.judaicalink.org/data/ep/1686052>
         a jl:EntityPage, jl:Place ;
         skos:prefLabel "Marseille" ;
-        jl:represents <http://data.judaicalink.org/data/Marseille>, <http://data.judaicalink.org/data/dbpedia/Marseille> .
+        jl:represents <http://data.judaicalink.org/data/dbpedia/Marseille>, <http://data.judaicalink.org/data/geo-coordinates/Marseille> .
 
-    <http://data.judaicalink.org/data/ep/2767357>
+    <http://data.judaicalink.org/data/ep/2779279>
         a jl:EntityPage, foaf:Person ;
         jl:represents <http://data.judaicalink.org/data/rujen/marselj> .
 
     <http://data.judaicalink.org/data/ep/1000242>
-        jl:splitInto <http://data.judaicalink.org/data/ep/1686052>, <http://data.judaicalink.org/data/ep/2767357> ;
+        jl:splitInto <http://data.judaicalink.org/data/ep/1686052>, <http://data.judaicalink.org/data/ep/2779279> ;
         jl:splitDate "2026-10-12"^^xsd:date .
 
     <http://data.judaicalink.org/data/ep/1009940>
