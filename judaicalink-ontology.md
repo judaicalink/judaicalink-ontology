@@ -651,52 +651,95 @@ jl:hasReference
     rdfs:comment "Reference or citation associated with a resource (e.g. bibliographic reference in an article)."@en ;
     rdfs:range rdfs:Literal .
 ```
-#### jl:cmMentionCount
+### Corpus presence
+Class: jl:CorpusPresence
+
+How a resource of JudaicaLink occurs in a corpus of texts, e.g. how often and when a person is mentioned in the
+journals of Compact Memory. One node per resource and corpus links the two (`jl:entity`, `jl:corpus`) and carries the
+statistics, so that the same terms serve every corpus. The statistics are as good as the links they are counted from
+(for Compact Memory: the automatic TagMe links of the dataset cm-tagme).
+
+Example (the dataset cm-entities):
+
+    <http://data.judaicalink.org/data/cm-entities/presence/dbpedia/A._E._Housman>
+        a jl:CorpusPresence ;
+        jl:entity <http://data.judaicalink.org/data/dbpedia/A._E._Housman> ;
+        jl:corpus <http://data.judaicalink.org/data/compact-memory/corpus> ;
+        jl:mentionCount "3"^^xsd:integer ;
+        jl:pageCount "2"^^xsd:integer ;
+        jl:firstMentionYear "1933"^^xsd:gYear ;
+        jl:lastMentionYear "1934"^^xsd:gYear ;
+        jl:journalCount "1"^^xsd:integer ;
+        jl:mostFrequentJournal <http://data.judaicalink.org/data/compact-memory/2651273> .
+
+#### jl:CorpusPresence
 ```
-jl:cmMentionCount
+jl:CorpusPresence a owl:Class ;
+    rdfs:label "Corpus presence"@en ;
+    rdfs:comment "The occurrence of a resource (jl:entity) in a corpus of texts (jl:corpus), with statistics such as the number of mentions."@en .
+```
+#### jl:entity
+```
+jl:entity
     a rdf:Property ;
-    rdfs:label "Compact Memory mentions"@en ;
-    rdfs:comment "Number of mentions of the resource in Compact Memory."@en ;
+    rdfs:label "entity"@en ;
+    rdfs:comment "Points to the JudaicaLink resource that this node is about: any resource, e.g. a record such as http://data.judaicalink.org/data/yivo/Moscow, a journal or a page; not specifically an entity page."@en ;
+    rdfs:range rdfs:Resource .
+```
+#### jl:corpus
+```
+jl:corpus
+    a rdf:Property ;
+    rdfs:label "corpus"@en ;
+    rdfs:comment "The corpus of texts that a jl:CorpusPresence is about, e.g. Compact Memory."@en ;
+    rdfs:range rdfs:Resource .
+```
+#### jl:mentionCount
+```
+jl:mentionCount
+    a rdf:Property ;
+    rdfs:label "mention count"@en ;
+    rdfs:comment "Number of mentions of the resource in the corpus."@en ;
     rdfs:range xsd:integer .
 ```
-#### jl:cmPageCount
+#### jl:pageCount
 ```
-jl:cmPageCount
+jl:pageCount
     a rdf:Property ;
-    rdfs:label "Compact Memory pages"@en ;
-    rdfs:comment "Number of Compact Memory pages that mention the resource."@en ;
+    rdfs:label "page count"@en ;
+    rdfs:comment "Number of pages of the corpus that mention the resource."@en ;
     rdfs:range xsd:integer .
 ```
-#### jl:cmJournalCount
+#### jl:firstMentionYear
 ```
-jl:cmJournalCount
+jl:firstMentionYear
     a rdf:Property ;
-    rdfs:label "Compact Memory journals"@en ;
-    rdfs:comment "Number of Compact Memory journals that mention the resource."@en ;
-    rdfs:range xsd:integer .
-```
-#### jl:cmFirstYear
-```
-jl:cmFirstYear
-    a rdf:Property ;
-    rdfs:label "first year in Compact Memory"@en ;
-    rdfs:comment "Year of the earliest Compact Memory page that mentions the resource."@en ;
+    rdfs:label "first mention year"@en ;
+    rdfs:comment "Year of the earliest text of the corpus that mentions the resource."@en ;
     rdfs:range xsd:gYear .
 ```
-#### jl:cmLastYear
+#### jl:lastMentionYear
 ```
-jl:cmLastYear
+jl:lastMentionYear
     a rdf:Property ;
-    rdfs:label "last year in Compact Memory"@en ;
-    rdfs:comment "Year of the latest Compact Memory page that mentions the resource."@en ;
+    rdfs:label "last mention year"@en ;
+    rdfs:comment "Year of the latest text of the corpus that mentions the resource."@en ;
     rdfs:range xsd:gYear .
 ```
-#### jl:cmMostFrequentJournal
+#### jl:journalCount
 ```
-jl:cmMostFrequentJournal
+jl:journalCount
+    a rdf:Property ;
+    rdfs:label "journal count"@en ;
+    rdfs:comment "Number of journals of the corpus that mention the resource (for corpora of periodicals)."@en ;
+    rdfs:range xsd:integer .
+```
+#### jl:mostFrequentJournal
+```
+jl:mostFrequentJournal
     a rdf:Property ;
     rdfs:label "most frequent journal"@en ;
-    rdfs:comment "The Compact Memory journal with the most mentions of the resource."@en ;
+    rdfs:comment "The journal of the corpus with the most mentions of the resource (for corpora of periodicals)."@en ;
     rdfs:range jl:Resource .
 ```
 ### Reference
