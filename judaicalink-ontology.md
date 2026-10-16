@@ -414,6 +414,14 @@ jl:occupationURI
     rdfs:comment "The occupation of the person as an IRI, e.g. an occupation concept; jl:occupation is the occupation as text (as jl:birthLocationURI is the place of birth as an IRI next to jl:birthLocation)."@en ;
     rdfs:range rdfs:Resource .
 ```
+#### jl:grandparent
+```
+jl:grandparent
+    a rdf:Property ;
+    rdfs:label "grandparent"@en ;
+    rdfs:comment "A grandparent of the person; the subject is the grandchild, as with schema:parent the subject is the child. For family relations JudaicaLink uses schema:parent, schema:spouse and schema:sibling; schema.org has no term for grandparents. Used where a source states the relation directly (e.g. the inscriptions of Epidat), also when the parent in between is not in the data."@en ;
+    rdfs:range foaf:Person .
+```
 #### jl:hasPublication
 ```
 jl:hasPublication
