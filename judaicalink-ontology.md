@@ -515,7 +515,8 @@ jl:birthLocationURI
     a rdf:Property ;
     rdfs:label "place of birth (IRI)"@en, "Geburtsort (IRI)"@de ;
     rdfs:comment "URI of the place of birth of the person."@en ;
-    rdfs:range rdfs:Resource .
+    rdfs:range rdfs:Resource ;
+    owl:equivalentProperty wdt:P19 .
 ```
 #### jl:deathLocation
 ```
@@ -531,7 +532,8 @@ jl:deathLocationURI
     a rdf:Property ;
     rdfs:label "place of death (IRI)"@en, "Sterbeort (IRI)"@de ;
     rdfs:comment "URI of the place of death of the person."@en ;
-    rdfs:range rdfs:Resource .
+    rdfs:range rdfs:Resource ;
+    owl:equivalentProperty wdt:P20 .
 ```
 #### jl:burialLocation
 ```
