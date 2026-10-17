@@ -48,6 +48,7 @@ The following namespaces are used in this ontology:
 @prefix dqv: <http://www.w3.org/ns/dqv#> .
 @prefix schema: <http://schema.org/> .
 @prefix void: <http://rdfs.org/ns/void#> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
 ```
 
 ### Describing terms
@@ -531,6 +532,23 @@ jl:deathLocationURI
     rdfs:label "place of death (IRI)"@en, "Sterbeort (IRI)"@de ;
     rdfs:comment "URI of the place of death of the person."@en ;
     rdfs:range rdfs:Resource .
+```
+#### jl:burialLocation
+```
+jl:burialLocation
+    a rdf:Property ;
+    rdfs:label "place of burial"@en, "Begräbnisort"@de ;
+    rdfs:comment "The place of burial of the person, as given by the source (text)."@en ;
+    rdfs:range rdfs:Literal .
+```
+#### jl:burialLocationURI
+```
+jl:burialLocationURI
+    a rdf:Property ;
+    rdfs:label "place of burial (IRI)"@en, "Begräbnisort (IRI)"@de ;
+    rdfs:comment "URI of the place of burial of the person."@en ;
+    rdfs:range rdfs:Resource ;
+    owl:equivalentProperty wdt:P119 .
 ```
 #### jl:occupation
 ```
