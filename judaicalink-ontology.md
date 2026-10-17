@@ -49,6 +49,7 @@ The following namespaces are used in this ontology:
 @prefix schema: <http://schema.org/> .
 @prefix void: <http://rdfs.org/ns/void#> .
 @prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
 ```
 
 ### Describing terms
@@ -199,16 +200,6 @@ jl:referTo
     rdfs:comment "Used for redirection of one concept to another concept mostly in encyclopedias (when there is a name change or other reasons)"@en ;
     rdfs:range skos:Concept .
 ```
-#### jl:represents (deprecated)
-```
-jl:represents
-    a rdf:Property ;
-    rdfs:label "represents"@en ;
-    rdfs:comment "Deprecated; use jl:sameAs."@en ;
-    owl:deprecated true ;
-    rdfs:domain jl:EntityPage ;
-    rdfs:range jl:Resource .
-```
 
 ### Classes
 
@@ -266,34 +257,6 @@ gndo:Work
 gndo:PlaceOrGeographicName
     jl:label "place (GND)"@en, "Geografikum (GND)"@de ;
     jl:comment "A place, in the class of the GND ontology, used by datasets that describe places in the terms of the GND (footprints, hhkeydocs)."@en, "Ein Ort, in der Klasse der GND-Ontologie, verwendet von Datensätzen, die Orte in den Begriffen der GND beschreiben (footprints, hhkeydocs)."@de .
-```
-#### jl:Place (deprecated)
-```
-jl:Place a owl:Class ;
-    rdfs:label "place"@en, "Ort"@de ;
-    rdfs:comment "Deprecated; use schema:Place."@en ;
-    owl:deprecated true .
-```
-#### jl:Work (deprecated)
-```
-jl:Work a owl:Class ;
-    rdfs:label "work"@en, "Werk"@de ;
-    rdfs:comment "Deprecated; use schema:CreativeWork."@en ;
-    owl:deprecated true .
-```
-#### jl:Subject (deprecated)
-```
-jl:Subject a owl:Class ;
-    rdfs:label "subject"@en, "Thema"@de ;
-    rdfs:comment "Deprecated; use skos:Concept."@en ;
-    owl:deprecated true .
-```
-#### jl:EntityPage (deprecated)
-```
-jl:EntityPage a owl:Class ;
-    rdfs:label "entity page"@en ;
-    rdfs:comment "Deprecated; an entity has the class of what it is (foaf:Person, schema:Place, …)."@en ;
-    owl:deprecated true .
 ```
 
 ### Names and labels
@@ -450,7 +413,7 @@ enrichment gives one (`jl:birthLocationURI`, `jl:deathLocationURI`). Example (a 
 jl:birthDate
     a rdf:Property ;
     rdfs:label "birth date"@en, "Geburtsdatum"@de ;
-    rdfs:comment "The date of birth of the person, as given by the source (free text)."@en ;
+    rdfs:comment "The date of birth as written by the source (text), e.g. \"um 1820\"; jl:birthDateNormalized gives the typed value."@en ;
     rdfs:range rdfs:Literal .
 ```
 #### jl:deathDate
@@ -458,16 +421,8 @@ jl:birthDate
 jl:deathDate
     a rdf:Property ;
     rdfs:label "death date"@en, "Sterbedatum"@de ;
-    rdfs:comment "The date of death of the person, as given by the source (free text)."@en ;
+    rdfs:comment "The date of death as written by the source (text), e.g. \"um 1820\"; jl:deathDateNormalized gives the typed value."@en ;
     rdfs:range rdfs:Literal .
-```
-#### jl:birthYear
-```
-jl:birthYear
-    a rdf:Property ;
-    rdfs:label "birth year"@en, "Geburtsjahr"@de ;
-    rdfs:comment "The year of birth of the person."@en ;
-    rdfs:range xsd:gYear .
 ```
 #### jl:birthDateNormalized
 ```
@@ -953,7 +908,7 @@ jl:mostFrequentJournal
 Every version of a dataset has a metadata file (`<slug>-meta.ttl.gz`) that describes it with VoID, DCAT, PROV and Dublin
 Core: its files, statistics, licence, sources and how it was made (decisions 0006 and 0018 of judaicalink-data). The
 kinds and methods of the datasets are concepts of the dataset `judaicalink-vocabulary`, stated as `dcterms:type`. The
-dataset terms of the former labs portal are listed under "Older terms".
+dataset terms of the former labs portal are under "Deprecated terms".
 
 #### jl:currentSubjects
 ```
@@ -965,263 +920,308 @@ jl:currentSubjects
     rdfs:range xsd:integer .
 ```
 
-### Older terms
+### Deprecated terms
 
-Terms of earlier versions of JudaicaLink that our current data does not use. They stay defined, so that older data
-and applications can still be read.
+Terms of earlier versions; where there is one, the comment names the term to use instead.
 
-#### jl:hasCategory
+#### jl:EntityPage
 ```
-jl:hasCategory
+jl:EntityPage
+    a owl:Class ;
+    rdfs:label "entity page"@en ;
+    rdfs:comment "Deprecated; an entity has the class of what it is (foaf:Person, schema:Place, …)."@en ;
+    owl:deprecated true .
+```
+#### jl:represents
+```
+jl:represents
     a rdf:Property ;
-    rdfs:label "has category "@en ;
-    rdfs:comment "The category to which the concept was assigned to in the original data source"@en ;
-    rdfs:range skos:Concept .
+    rdfs:label "represents"@en ;
+    rdfs:comment "Deprecated; use jl:sameAs."@en ;
+    owl:deprecated true .
 ```
-#### jl:lat
+#### jl:Place
 ```
-jl:lat
+jl:Place
+    a owl:Class ;
+    rdfs:label "place"@en ;
+    rdfs:comment "Deprecated; use schema:Place."@en ;
+    owl:deprecated true .
+```
+#### jl:Work
+```
+jl:Work
+    a owl:Class ;
+    rdfs:label "work"@en ;
+    rdfs:comment "Deprecated; use schema:CreativeWork."@en ;
+    owl:deprecated true .
+```
+#### jl:Subject
+```
+jl:Subject
+    a owl:Class ;
+    rdfs:label "subject"@en ;
+    rdfs:comment "Deprecated; use skos:Concept."@en ;
+    owl:deprecated true .
+```
+#### jl:birthYear
+```
+jl:birthYear
     a rdf:Property ;
-    rdfs:label "latitude"@en ;
-    rdfs:comment "Latitude of a place or resource, in decimal degrees. Not used any more: places have geo:asWKT."@en ;
-    rdfs:range xsd:decimal .
-```
-#### jl:lon
-```
-jl:lon
-    a rdf:Property ;
-    rdfs:label "longitude"@en ;
-    rdfs:comment "Longitude of a place or resource, in decimal degrees. Not used any more: places have geo:asWKT."@en ;
-    rdfs:range xsd:decimal .
+    rdfs:label "birth year"@en ;
+    rdfs:comment "Deprecated; use jl:birthDate and jl:birthDateNormalized."@en ;
+    owl:deprecated true .
 ```
 #### jl:deathYear
 ```
 jl:deathYear
     a rdf:Property ;
     rdfs:label "death year"@en ;
-    rdfs:comment "The year of death of the person."@en ;
-    rdfs:range xsd:gYear .
+    rdfs:comment "Deprecated; use jl:deathDate and jl:deathDateNormalized."@en ;
+    owl:deprecated true .
+```
+#### jl:lat
+```
+jl:lat
+    a rdf:Property ;
+    rdfs:label "latitude"@en ;
+    rdfs:comment "Deprecated; use geo:asWKT."@en ;
+    owl:deprecated true .
+```
+#### jl:lon
+```
+jl:lon
+    a rdf:Property ;
+    rdfs:label "longitude"@en ;
+    rdfs:comment "Deprecated; use geo:asWKT."@en ;
+    owl:deprecated true .
+```
+#### jl:hasCategory
+```
+jl:hasCategory
+    a rdf:Property ;
+    rdfs:label "has category "@en ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
 ```
 #### jl:hasAnnotation
 ```
 jl:hasAnnotation
     a rdf:Property ;
     rdfs:label "has annotation"@en ;
-    rdfs:comment "An annotation to the triple"@en ;
-    rdfs:range rdfs:Literal .
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
 ```
 #### jl:Resource
 ```
-jl:Resource a owl:Class ;
+jl:Resource
+    a owl:Class ;
     rdfs:label "Resource"@en ;
-    rdfs:comment "Generic resource in the JudaicaLink knowledge graph (person, place, document, journal, issue, etc.)."@en .
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
 ```
 #### jl:Journal
 ```
-jl:Journal a owl:Class ;
+jl:Journal
+    a owl:Class ;
     rdfs:label "Journal"@en ;
-    rdfs:comment "A scholarly or academic journal in which publications or articles appear."@en .
+    rdfs:comment "Deprecated; use schema:Periodical."@en ;
+    owl:deprecated true .
 ```
 #### jl:Issue
 ```
-jl:Issue a owl:Class ;
+jl:Issue
+    a owl:Class ;
     rdfs:label "Journal issue"@en ;
-    rdfs:comment "A specific issue of a journal, usually identified by volume, number and year."@en .
+    rdfs:comment "Deprecated; use schema:PublicationIssue."@en ;
+    owl:deprecated true .
 ```
-
-The annotations of the labs portal (user comments on the data):
-
 #### jl:Annotation
 ```
-jl:Annotation a owl:Class ;
-  rdfs:label "Annotation" .
+jl:Annotation
+    a owl:Class ;
+    rdfs:comment "Deprecated; use oa:Annotation."@en ;
+    owl:deprecated true .
 ```
 #### jl:text
 ```
-jl:text a owl:DatatypeProperty ;
-  rdfs:label "Text" ;
-  rdfs:domain jl:Annotation ;
-  rdfs:range xsd:string .
+jl:text
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated; use oa:bodyValue."@en ;
+    owl:deprecated true .
 ```
 #### jl:uuid
 ```
-jl:uuid a owl:DatatypeProperty ;
-  rdfs:label "UUID" ;
-  rdfs:domain jl:Annotation ;
-  rdfs:range xsd:string .
+jl:uuid
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
 ```
 #### jl:status
 ```
-jl:status a owl:DatatypeProperty ;
-  rdfs:label "Status" ;
-  rdfs:domain jl:Annotation ;
-  rdfs:range xsd:string .
+jl:status
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
 ```
 #### jl:published
 ```
-jl:published a owl:DatatypeProperty ;
-  rdfs:label "Published" ;
-  rdfs:domain jl:Annotation ;
-  rdfs:range xsd:boolean .
+jl:published
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
 ```
 #### jl:issue-url
 ```
-jl:issue-url a owl:ObjectProperty ;
-  rdfs:label "Issue URL" ;
-  rdfs:domain jl:Annotation ;
-  rdfs:range xsd:anyURI .
+jl:issue-url
+    a owl:ObjectProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
 ```
 #### jl:tag
 ```
-jl:tag a owl:DatatypeProperty ;
-  rdfs:label "Tag" ;
-  rdfs:domain jl:Annotation ;
-  rdfs:range rdfs:Literal .
+jl:tag
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
 ```
 #### jl:user
 ```
-jl:user a owl:DatatypeProperty ;
-  rdfs:label "User" ;
-  rdfs:domain jl:Annotation ;
-  rdfs:range xsd:string .
+jl:user
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
 ```
 #### jl:timestamp
 ```
-jl:timestamp a owl:DatatypeProperty ;
-  rdfs:label "Timestamp" ;
-  rdfs:domain jl:Annotation ;
-  rdfs:range xsd:dateTime .
+jl:timestamp
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
 ```
 #### jl:ip
 ```
-jl:ip a owl:DatatypeProperty ;
-  rdfs:label "IP" ;
-  rdfs:domain jl:Annotation ;
-  rdfs:range xsd:string .
+jl:ip
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
 ```
-
-The dataset descriptions of the labs portal (class `jl:Dataset`); the catalogue of judaicalink-data describes datasets
-with VoID and DCAT instead:
-
 #### jl:Dataset
 ```
-jl:Dataset a owl:Class ;
+jl:Dataset
+    a owl:Class ;
     rdfs:label "Dataset"@en ;
-    rdfs:comment "A dataset in the catalogue of the former labs portal."@en .
+    rdfs:comment "Deprecated; use void:Dataset."@en ;
+    owl:deprecated true .
 ```
 #### jl:hasTitle
 ```
 jl:hasTitle
     a owl:DatatypeProperty ;
     rdfs:label "title of the dataset"@en ;
-    rdfs:comment "The human-readable title of the dataset."@en ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:Literal .
+    rdfs:comment "Deprecated; use dcterms:title."@en ;
+    owl:deprecated true .
 ```
 #### jl:hasDescription
 ```
-jl:hasDescription a owl:DatatypeProperty ;
-    rdfs:label "Description" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:Literal .
+jl:hasDescription
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated; use dcterms:description."@en ;
+    owl:deprecated true .
 ```
 #### jl:hasFiles
 ```
-jl:hasFiles a owl:DatatypeProperty ;
-    rdfs:label "The files for the Dataset" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:Literal .
+jl:hasFiles
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated; use dcat:distribution."@en ;
+    owl:deprecated true .
 ```
 #### jl:createdAt
 ```
-jl:createdAt a owl:DatatypeProperty ;
-    rdfs:label "Created at" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range xsd:date .
+jl:createdAt
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated; use dcterms:created."@en ;
+    owl:deprecated true .
 ```
 #### jl:hasAuthor
 ```
-jl:hasAuthor a owl:DatatypeProperty ;
-    rdfs:label "Creator Name" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:Literal .
+jl:hasAuthor
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated; use dcterms:creator."@en ;
+    owl:deprecated true .
 ```
 #### jl:hasAuthorEmail
 ```
-jl:hasAuthorEmail a owl:DatatypeProperty ;
-    rdfs:label "Creator Email" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:Literal .
+jl:hasAuthorEmail
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
 ```
 #### jl:hasAuthorlink
 ```
-jl:hasAuthorlink a owl:ObjectProperty ;
-    rdfs:label "hasAuthorLink" ;
-    rdfs:comment "Link to an external author page or authority record (e.g. ORCID, GND, VIAF, university profile)."@en ;
-    rdfs:domain jl:Resource ;
-    rdfs:range rdfs:Resource .
+jl:hasAuthorlink
+    a owl:ObjectProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
 ```
 #### jl:hasSlug
 ```
-jl:hasSlug a owl:DatatypeProperty ;
-    rdfs:label "Slug" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:Literal .
+jl:hasSlug
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated; use dcterms:identifier."@en ;
+    owl:deprecated true .
 ```
 #### jl:hasGraph
 ```
-jl:hasGraph a owl:DatatypeProperty ;
-    rdfs:label "Graph" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:Literal .
+jl:hasGraph
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
 ```
 #### jl:isLoaded
 ```
-jl:isLoaded a owl:DatatypeProperty ;
-    rdfs:label "Is loaded" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range xsd:boolean .
+jl:isLoaded
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
 ```
 #### jl:hasExample
 ```
-jl:hasExample a owl:DatatypeProperty ;
-    rdfs:label "Example URI" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range xsd:anyURI .
+jl:hasExample
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated; use void:exampleResource."@en ;
+    owl:deprecated true .
 ```
 #### jl:hasLicense
 ```
-jl:hasLicense a owl:DatatypeProperty ;
-    rdfs:label "License" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:Literal .
+jl:hasLicense
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated; use dcterms:license."@en ;
+    owl:deprecated true .
 ```
 #### jl:hasSource
 ```
-jl:hasSource a owl:DatatypeProperty ;
-    rdfs:label "Source URI" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range xsd:anyURI .
+jl:hasSource
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated; use dcterms:source."@en ;
+    owl:deprecated true .
 ```
 #### jl:gitCommit
 ```
 jl:gitCommit
     a owl:DatatypeProperty ;
     rdfs:label "git commit"@en ;
-    rdfs:comment "Identifier of the Git commit from which this dataset or resource was generated."@en ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range xsd:string .
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
 ```
 #### jl:gitWeb
 ```
 jl:gitWeb
     a owl:DatatypeProperty ;
     rdfs:label "Git web URL"@en ;
-    rdfs:comment "Web URL of the Git repository or specific commit associated with this dataset or resource."@en ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range xsd:anyURI .
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
 ```
-
 
 ### Metadata
 
