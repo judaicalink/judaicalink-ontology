@@ -16,6 +16,9 @@ Own terms are defined with `rdfs:label` and `rdfs:comment`. Foreign terms are de
 namespace (`jl:label`, `jl:comment`), plus their `rdfs:domain` and `rdfs:range` exactly as the original vocabulary
 states them.
 
+Dublin Core: only the DCMI Metadata Terms (`dcterms:`), also where a source uses the fifteen elements (`dc:`,
+`http://purl.org/dc/elements/1.1/`); DCMI encourages the use of `dcterms:`.
+
 **Vocabularies of single sources** are documented by the sources or by vocabulary files of the datasets:
 
 - GND: [GND Ontology](https://d-nb.info/standards/elementset/gnd);
@@ -41,7 +44,6 @@ The following namespaces are used in this ontology:
 @prefix jl: <http://data.judaicalink.org/ontology/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
@@ -301,12 +303,6 @@ foaf:name
     rdfs:domain owl:Thing ;
     rdfs:range rdfs:Literal .
 ```
-#### dc:title
-```
-dc:title
-    jl:label "title"@en, "Titel"@de ;
-    jl:comment "The title of a work (footprints, nrwbibdjg)."@en, "Der Titel eines Werks (footprints, nrwbibdjg)."@de .
-```
 #### jl:title
 ```
 jl:title
@@ -428,12 +424,6 @@ dcterms:date
 dcterms:subject
     jl:label "subject"@en, "Thema"@de ;
     jl:comment "The topic of a resource (a category or subject heading of the source)."@en, "Das Thema einer Ressource (eine Kategorie oder ein Schlagwort der Quelle)."@de .
-```
-#### dc:subject
-```
-dc:subject
-    jl:label "subject"@en, "Thema"@de ;
-    jl:comment "The topic of a resource as text (hirsch-family, stolpersteine)."@en, "Das Thema einer Ressource als Text (hirsch-family, stolpersteine)."@de .
 ```
 
 ### Persons
@@ -618,6 +608,24 @@ gndo:hierarchicalSuperiorOfPlaceOrGeographicName
 
 ### Works and organisations
 
+#### dcterms:creator
+```
+dcterms:creator
+    jl:label "creator"@en, "Urheber"@de ;
+    jl:comment "The creator of a work: the record of a person, or the name as text where the source does not identify the person (footprints, nli-records, nrwbibdjg)."@en, "Der Urheber eines Werks: der Datensatz einer Person oder der Name als Text, wo die Quelle die Person nicht identifiziert (footprints, nli-records, nrwbibdjg)."@de .
+```
+#### dcterms:contributor
+```
+dcterms:contributor
+    jl:label "contributor"@en, "Beitragender"@de ;
+    jl:comment "A contributor to a work (e.g. an editor), as a record or as text, like dcterms:creator (footprints, nrwbibdjg)."@en, "Ein Beitragender zu einem Werk (z. B. ein Herausgeber), als Datensatz oder als Text, wie dcterms:creator (footprints, nrwbibdjg)."@de .
+```
+#### dcterms:publisher
+```
+dcterms:publisher
+    jl:label "publisher"@en, "Verlag"@de ;
+    jl:comment "The publisher of a work or periodical, as a record or as text (compact-memory, footprints)."@en, "Der Verlag eines Werks oder einer Zeitschrift, als Datensatz oder als Text (compact-memory, footprints)."@de .
+```
 #### gndo:author
 ```
 gndo:author
