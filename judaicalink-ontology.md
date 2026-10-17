@@ -18,8 +18,7 @@ states them.
 
 **Vocabularies of single sources** are documented by the sources or by vocabulary files of the datasets:
 
-- GND: [GND Ontology](https://d-nb.info/standards/elementset/gnd) (the dataset `gnd` uses the namespace
-  `https://d-nb.info/standards/elementset/gnd#`; older datasets use `http://d-nb.info/standards/elementset/gnd#`);
+- GND: [GND Ontology](https://d-nb.info/standards/elementset/gnd);
 - LC Name Authority File: [MADS/RDF](https://www.loc.gov/standards/mads/rdf/);
 - GeoNames: [GeoNames Ontology](https://www.geonames.org/ontology/documentation.html);
 - Wikidata: [Wikidata RDF](https://www.mediawiki.org/wiki/Wikibase/Indexing/RDF_Dump_Format) (direct and normalized
@@ -38,7 +37,7 @@ The following namespaces are used in this ontology:
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix gndo: <http://d-nb.info/standards/elementset/gnd#> .
+@prefix gndo: <https://d-nb.info/standards/elementset/gnd#> .
 @prefix jl: <http://data.judaicalink.org/ontology/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -402,7 +401,7 @@ dcterms:identifier
 ```
 gndo:gndIdentifier
     jl:label "GND number"@en, "GND-Nummer"@de ;
-    jl:comment "The GND number of the record, as text; ls-gnd links the record to our record of the GND entry."@en, "Die GND-Nummer der Person, Organisation oder des Orts, den der Datensatz beschreibt, als Text; das Linkset ls-gnd verknüpft den Datensatz mit unserem Datensatz des GND-Eintrags. Der Datensatz gnd gibt sie im Namensraum https://d-nb.info/standards/elementset/gnd# an."@de ;
+    jl:comment "The GND number of the record, as text; ls-gnd links the record to our record of the GND entry."@en, "Die GND-Nummer des Datensatzes, als Text; ls-gnd verknüpft den Datensatz mit unserem Datensatz des GND-Eintrags."@de ;
     rdfs:range rdfs:Literal .
 ```
 #### dcterms:type
