@@ -258,6 +258,18 @@ gndo:PlaceOrGeographicName
     jl:label "place (GND)"@en, "Geografikum (GND)"@de ;
     jl:comment "A place, in the class of the GND ontology, used by datasets that describe places in the terms of the GND (footprints, hhkeydocs)."@en, "Ein Ort, in der Klasse der GND-Ontologie, verwendet von Datensätzen, die Orte in den Begriffen der GND beschreiben (footprints, hhkeydocs)."@de .
 ```
+#### rdf:Property
+```
+rdf:Property
+    jl:label "property"@en, "Eigenschaft"@de ;
+    jl:comment "A property that a dataset defines in its own vocabulary (bhr, haskala)."@en, "Eine Eigenschaft, die ein Datensatz in seinem eigenen Vokabular definiert (bhr, haskala)."@de .
+```
+#### skos:ConceptScheme
+```
+skos:ConceptScheme
+    jl:label "concept scheme"@en, "Begriffssystem"@de ;
+    jl:comment "A controlled vocabulary of concepts: of a source (haskala) or of JudaicaLink (judaicalink-vocabulary: the kinds and methods of datasets)."@en, "Ein kontrolliertes Vokabular von Begriffen: einer Quelle (haskala) oder von JudaicaLink (judaicalink-vocabulary: die Arten und Methoden der Datensätze)."@de .
+```
 
 ### Names and labels
 
@@ -303,6 +315,13 @@ jl:title
     rdfs:comment "Title of a resource, such as a document, work, or dataset."@en ;
     rdfs:range rdfs:Literal .
 ```
+#### dcterms:title
+```
+dcterms:title
+    jl:label "title"@en, "Titel"@de ;
+    jl:comment "The title of a work or a periodical, as given by the source (compact-memory, nli-records)."@en, "Der Titel eines Werks oder einer Zeitschrift, wie von der Quelle angegeben (compact-memory, nli-records)."@de ;
+    rdfs:range rdfs:Literal .
+```
 
 ### Descriptions, sources and identifiers
 
@@ -346,6 +365,22 @@ foaf:primaryTopic
     rdfs:domain foaf:Document ;
     rdfs:range owl:Thing .
 ```
+#### foaf:page
+```
+foaf:page
+    jl:label "page"@en, "Seite"@de ;
+    jl:comment "A web page about the resource: its page in a digital collection (compact-memory) or its Wikipedia article (gnd)."@en, "Eine Webseite über die Ressource: ihre Seite in einer digitalen Sammlung (compact-memory) oder ihr Wikipedia-Artikel (gnd)."@de ;
+    rdfs:domain owl:Thing ;
+    rdfs:range foaf:Document .
+```
+#### foaf:homepage
+```
+foaf:homepage
+    jl:label "homepage"@en, "Homepage"@de ;
+    jl:comment "The homepage of an organisation or agent (hhkeydocs, judaicalink-agents)."@en, "Die Homepage einer Organisation oder eines Akteurs (hhkeydocs, judaicalink-agents)."@de ;
+    rdfs:domain owl:Thing ;
+    rdfs:range foaf:Document .
+```
 #### rdfs:comment
 ```
 rdfs:comment
@@ -379,6 +414,13 @@ dcterms:type
 dcterms:created
     jl:label "created"@en, "erstellt"@de ;
     jl:comment "The date of creation of a resource as given by its source."@en, "Das Erstellungsdatum einer Ressource, wie von der Quelle angegeben."@de ;
+    rdfs:range rdfs:Literal .
+```
+#### dcterms:date
+```
+dcterms:date
+    jl:label "date"@en, "Datum"@de ;
+    jl:comment "The date of a resource as given by the source, e.g. of a volume of a periodical (compact-memory) or of a work (nli-records)."@en, "Das Datum einer Ressource, wie von der Quelle angegeben, z. B. eines Jahrgangs einer Zeitschrift (compact-memory) oder eines Werks (nli-records)."@de ;
     rdfs:range rdfs:Literal .
 ```
 #### dcterms:subject
@@ -531,6 +573,13 @@ jl:grandparent
     rdfs:comment "A grandparent of the person; the subject is the grandchild, as with schema:parent. schema.org has no term for grandparents."@en ;
     rdfs:range foaf:Person .
 ```
+#### gndo:relatedPerson
+```
+gndo:relatedPerson
+    jl:label "related person"@en, "in Beziehung stehende Person"@de ;
+    jl:comment "A person related to the person, where the source does not say how (gba, gnd)."@en, "Eine Person, die mit der Person in Beziehung steht, wo die Quelle nicht sagt, wie (gba, gnd)."@de ;
+    rdfs:range gndo:DifferentiatedPerson .
+```
 #### jl:hasPublication
 ```
 jl:hasPublication
@@ -576,6 +625,13 @@ gndo:author
     jl:comment "The author of a work (footprints, nrwbibdjg)."@en, "Der Verfasser eines Werks (footprints, nrwbibdjg)."@de ;
     rdfs:domain gndo:Work .
 ```
+#### gndo:editor
+```
+gndo:editor
+    jl:label "editor"@en, "Herausgeber"@de ;
+    jl:comment "The editor of a work (footprints, nrwbibdjg)."@en, "Der Herausgeber eines Werks (footprints, nrwbibdjg)."@de ;
+    rdfs:domain gndo:Work .
+```
 #### gndo:dateOfEstablishment
 ```
 gndo:dateOfEstablishment
@@ -587,6 +643,26 @@ gndo:dateOfEstablishment
 gndo:dateOfTermination
     jl:label "date of termination"@en, "Auflösungsdatum"@de ;
     jl:comment "The date of termination of an organisation, as given by the source (hhkeydocs, nrwbibdjg)."@en, "Das Auflösungsdatum einer Organisation, wie von der Quelle angegeben (hhkeydocs, nrwbibdjg)."@de .
+```
+#### dcterms:isPartOf
+```
+dcterms:isPartOf
+    jl:label "part of"@en, "Teil von"@de ;
+    jl:comment "The resource of which a resource is a part: the journal of a volume, the corpus of a journal (compact-memory), the journal or volume of an article (nrwbibdjg), the part of a book (haskala)."@en, "Die Ressource, zu der eine Ressource gehört: die Zeitschrift eines Jahrgangs, das Korpus einer Zeitschrift (compact-memory), die Zeitschrift oder der Sammelband eines Artikels (nrwbibdjg), der Teil eines Buchs (haskala)."@de .
+```
+#### dcterms:issued
+```
+dcterms:issued
+    jl:label "issued"@en, "erschienen"@de ;
+    jl:comment "The year of publication of a work or volume, as given by the source (compact-memory, nrwbibdjg)."@en, "Das Erscheinungsjahr eines Werks oder Bandes, wie von der Quelle angegeben (compact-memory, nrwbibdjg)."@de ;
+    rdfs:range rdfs:Literal .
+```
+#### dcterms:bibliographicCitation
+```
+dcterms:bibliographicCitation
+    jl:label "bibliographic citation"@en, "bibliografische Angabe"@de ;
+    jl:comment "A bibliographic reference as text: where a record is printed (bhr: volume and page of the handbook) or the rest of the citation of a title (nrwbibdjg)."@en, "Eine bibliografische Angabe als Text: wo ein Datensatz gedruckt ist (bhr: Band und Seite des Handbuchs) oder der Rest der Zitierangabe eines Titels (nrwbibdjg)."@de ;
+    rdfs:range rdfs:Literal .
 ```
 
 ### Concepts
@@ -614,6 +690,13 @@ skos:narrower
 skos:scopeNote
     jl:label "scope note"@en, "Anwendungshinweis"@de ;
     jl:comment "A note on the scope of a concept, as given by the source."@en, "Ein Hinweis auf den Anwendungsbereich eines Begriffs, wie von der Quelle angegeben."@de .
+```
+#### skos:inScheme
+```
+skos:inScheme
+    jl:label "in scheme"@en, "in Begriffssystem"@de ;
+    jl:comment "The concept scheme a concept belongs to (haskala, judaicalink-vocabulary)."@en, "Das Begriffssystem, zu dem ein Begriff gehört (haskala, judaicalink-vocabulary)."@de ;
+    rdfs:range skos:ConceptScheme .
 ```
 
 ### Annotations
