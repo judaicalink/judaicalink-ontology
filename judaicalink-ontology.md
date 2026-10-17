@@ -6,196 +6,103 @@ This is the main ontology document. All other representations are generated auto
 
 - [Turtle](judaicalink-ontology.ttl)
 
+### What this document describes
+
+The **common layer** of the JudaicaLink data: the classes and properties our datasets share, our own (`jl:`) and those
+of other vocabularies. A term belongs to it if the entities (dataset `ep`) or our linksets use it (must), or if several
+source datasets use it (should).
+
+Own terms are defined with `rdfs:label` and `rdfs:comment`. Foreign terms are described only with properties of our
+namespace (`jl:label`, `jl:comment`), plus their `rdfs:domain` and `rdfs:range` exactly as the original vocabulary
+states them.
+
+**Vocabularies of single sources** are documented by the sources or by vocabulary files of the datasets:
+
+- GND: [GND Ontology](https://d-nb.info/standards/elementset/gnd);
+- LC Name Authority File: [MADS/RDF](https://www.loc.gov/standards/mads/rdf/);
+- GeoNames: [GeoNames Ontology](https://www.geonames.org/ontology/documentation.html);
+- Wikidata: [Wikidata RDF](https://www.mediawiki.org/wiki/Wikibase/Indexing/RDF_Dump_Format) (direct and normalized
+  properties, `wdt:`, `wdtn:`);
+- the haskala database: `http://data.judaicalink.org/data/haskala/vocab/` (file `haskala-vocabulary.ttl.gz` of the
+  dataset `haskala`);
+- the Biographisches Portal der Rabbiner: `http://data.judaicalink.org/data/bhr/vocab/` (file
+  `bhr-vocabulary.ttl.gz` of the dataset `bhr`).
+
 ### Namespaces
 The following namespaces are used in this ontology:
 
 ```
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix gndo: <http://d-nb.info/standards/elementset/gnd#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix gndo: <https://d-nb.info/standards/elementset/gnd#> .
 @prefix jl: <http://data.judaicalink.org/ontology/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix schema: <http://schema.org/> .
 @prefix void: <http://rdfs.org/ns/void#> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
 ```
 
-### Concept
+### Describing terms
 
-Class: skos:Concept
+How JudaicaLink labels and uses the terms of other vocabularies. Interfaces take the label of a term from `jl:label`
+(for our own terms: `rdfs:label`), so that they show our label even when the original vocabulary is loaded as well.
 
+#### jl:label
+```
+jl:label
+    a owl:AnnotationProperty ;
+    rdfs:label "label (JudaicaLink)"@en, "Bezeichnung (JudaicaLink)"@de ;
+    rdfs:comment "The label JudaicaLink uses for a term in its interfaces."@en ;
+    rdfs:subPropertyOf rdfs:label .
+```
+#### jl:comment
+```
+jl:comment
+    a owl:AnnotationProperty ;
+    rdfs:label "usage note (JudaicaLink)"@en, "Verwendungshinweis (JudaicaLink)"@de ;
+    rdfs:comment "How JudaicaLink uses a term."@en ;
+    rdfs:subPropertyOf rdfs:comment .
+```
 
-#### skos:altLabel
-```
-skos:altLabel
-    a rdf:Property ;
-    rdfs:label "alternative label"@en ;
-    rdfs:comment "Alternative writing format or language of the preferred label of a person or concept"@en ;
-    rdfs:range rdfs:Literal .
-```
-#### skos:prefLabel
-```
-skos:prefLabel
-    a rdf:Property ;
-    rdfs:label "preferred label"@en ;
-    rdfs:comment "The label that is preferred to be used for a person or concept"@en ;
-    rdfs:range rdfs:Literal .
-```
-#### skos:related
-```
-skos:related
-    a rdf:Property ;
-    rdfs:label "has related"@en ;
-    rdfs:comment "used to assert an associative link between two skos concepts"@en ;
-    rdfs:range skos:Concept .
-```
-#### skos:scopeNote
-```
-skos:scopeNote
-    a rdf:Property ;
-    rdfs:label "scope note"@en ;
-    rdfs:comment "Notes are used to provide information relating to skos concepts"@en ;
-    rdfs:range rdfs:Literal .
-```
-#### skos:broader
-```
-skos:broader
-    a rdf:Property ;
-    rdfs:label "has broader"@en ;
-    rdfs:comment "used to indicates that one skos concept is in some way more general (broader) than the other"@en  ;
-    rdfs:range skos:Concept .
-```
-#### skos:narrower
-```
-skos:narrower
-    a rdf:Property ;
-    rdfs:label "has narrower"@en ;
-    rdfs:comment "used to indicates that one skos concept is in some way less general (narrower) than the other"@en ;
-    rdfs:range skos:Concept .
-```
-#### foaf:primaryTopic
-```
-foaf:primaryTopic
-    a rdf:Property ;
-    rdfs:label "primary topic"@en ;
-    rdfs:comment "The primary topic of some page or document"@en ;
-    rdfs:range owl:Thing .
-```
-#### owl:sameAs
-```
-owl:sameAs
-    a rdf:Property ;
-    rdfs:label "same as"@en ;
-    rdfs:comment "These constructs may be used to create a number of different names that refer to the same individual"@en ;
-    rdfs:range owl:Thing .
-```
-#### dcterms:identifier
-```
-dcterms:identifier
-    a rdf:Property ;
-    rdfs:label "identifier"@en ;
-    rdfs:comment "An unambiguous reference to the resource within a given context"@en ;
-    rdfs:range rdfs:Literal .
-```
-#### dcterms:subject
-```
-dcterms:subject
-    a rdf:Property ;
-    rdfs:label "subject"@en ;
-    rdfs:comment "The topic of the resource, category or subject heading that further describes this resource. (broader category used to describe ) "@en ;
-    rdfs:range owl:Thing .
-```
-#### jl:describedAt
-```
-jl:describedAt
-    a rdf:Property ;
-    rdfs:label "described at"@en ;
-    rdfs:comment "Link to textual resource of encyclopedia article"@en ;
-    rdfs:range foaf:Document .
-```
-#### jl:hasAbstract
-```
-jl:hasAbstract
-    a rdf:Property ;
-    rdfs:label "has abstract"@en ;
-    rdfs:comment "The abstract of the article in which the concept or the person is described "@en ;
-    rdfs:range rdfs:Literal .
-```
-#### jl:hasCategory
-```
-jl:hasCategory
-    a rdf:Property ;
-    rdfs:label "has category "@en ;
-    rdfs:comment "The category to which the concept was assigned to in the original data source"@en ;
-    rdfs:range skos:Concept .
-```
-#### jl:referTo
-```
-jl:referTo
-    a rdf:Property ;
-    rdfs:label "refer to"@en ;
-    rdfs:comment "Used for redirection of one concept to another concept mostly in encyclopedias (when there is a name change or other reasons)"@en ;
-    rdfs:range skos:Concept .
-```
-#### geo:asWKT
-```
-geo:asWKT
-    a rdf:Property ;
-    rdfs:label "asWKT"@en ;
-    rdfs:comment "The WKT serialization of a geometry"@en ;
-    rdfs:range geo:wktLiteral .
-```
-#### jl:lat
-```
-jl:lat
-    a rdf:Property ;
-    rdfs:label "latitude"@en ;
-    rdfs:comment "Latitude of a place or resource, in decimal degrees."@en ;
-    rdfs:range xsd:decimal .
-```
-#### jl:lon
-```
-jl:lon
-    a rdf:Property ;
-    rdfs:label "longitude"@en ;
-    rdfs:comment "Longitude of a place or resource, in decimal degrees."@en ;
-    rdfs:range xsd:decimal .
-```
-#### jl:hasAnnotation
-```
-jl:hasAnnotation
-    a rdf:Property ;
-    rdfs:label "has annotation"@en ;
-    rdfs:comment "An annotation to the triple"@en ;
-    rdfs:range rdfs:Literal .
-```
-### Entity pages
+### Identity and history
 
-Class: jl:EntityPage
+**Identity.** The sources state that their records are the same as others (`owl:sameAs`); JudaicaLink takes these
+statements as given but does not follow them on its own. What JudaicaLink itself states to be the same entity, by its
+own rules, is `jl:sameAs`: in the linksets per authority dataset (a record of ours and our record of the authority
+entry) and in the dataset `ep` (an entity of JudaicaLink and the records it brings together). `jl:sameAs` is a
+subproperty of `owl:sameAs`, so it means the same for anyone who uses OWL.
 
-An entity page is the JudaicaLink resource for one person, place, organisation, work or subject: it brings together
-the records that the datasets have about it (`jl:represents`) and repeats their main facts (names, dates, places,
-identifiers), chosen by a fixed precedence of the datasets. Entity pages are made by the dataset `ep`, one version at a
-time; their IRIs (`http://data.judaicalink.org/data/ep/<number>`) stay stable from version to version. When the
-records show that two entity pages stand for the same entity, one is merged into the other (`jl:mergedInto`, the older
-IRI is kept); when they show that an entity page stood for several entities, it is split (`jl:splitInto`); an entity
-page that no longer stands for a person, place, organisation, work or subject is retired (`jl:retiredDate`). Each of
-these is stated once, with the date of the version that made the change; an IRI is never used again. Example (from
-the version 2026-10-12 of `ep`): the entity page of 2021 for Marseille also held a person of the Russian Jewish
-Encyclopedia, the composer Paul Marselle, linked to the city by his name; it was split into a page for the city and
-one for the composer. The GND record of Johanan ben Zakkai had a page of its own; it was merged into his page.
+**The entities of JudaicaLink** (dataset `ep`): one IRI per person, place, organisation, work or subject
+(`http://data.judaicalink.org/data/ep/<number>`), which brings together the records of the datasets about it
+(`jl:sameAs`) and repeats their main facts (names, dates, places, identifiers), chosen by a fixed precedence of the
+datasets. An entity has the class of what it is (`foaf:Person`, `schema:Place`, …); that it is one of JudaicaLink's
+entities is said by its dataset. On the web it is shown as an entity page. The IRIs stay stable from version to
+version. When the records show that two entities are the same, one IRI is merged into the other (`jl:mergedInto`, the
+older IRI is kept); when they show that an IRI stood for several entities, it is split (`jl:splitInto`); an IRI that
+no longer stands for a person, place, organisation, work or subject is retired (`jl:retiredDate`). Each of these is
+stated once, with the date of the version that made the change; an IRI is never used again. Example: the entity of
+2021 for Marseille also held a person of the Russian Jewish Encyclopedia, the composer Paul Marselle, linked to the
+city by his name; it was split into the city and the composer. The GND record of Johanan ben Zakkai had an entity of
+its own; it was merged into his.
 
     <http://data.judaicalink.org/data/ep/1686052>
-        a jl:EntityPage, jl:Place ;
+        a schema:Place ;
         skos:prefLabel "Marseille" ;
-        jl:represents <http://data.judaicalink.org/data/dbpedia/Marseille>, <http://data.judaicalink.org/data/geo-coordinates/Marseille> .
+        jl:sameAs <http://data.judaicalink.org/data/dbpedia/Marseille>, <http://data.judaicalink.org/data/geo-coordinates/Marseille> .
 
     <http://data.judaicalink.org/data/ep/2779279>
-        a jl:EntityPage, foaf:Person ;
-        jl:represents <http://data.judaicalink.org/data/rujen/marselj> .
+        a foaf:Person ;
+        jl:sameAs <http://data.judaicalink.org/data/rujen/marselj> .
 
     <http://data.judaicalink.org/data/ep/1000242>
         jl:splitInto <http://data.judaicalink.org/data/ep/1686052>, <http://data.judaicalink.org/data/ep/2779279> ;
@@ -205,128 +112,294 @@ one for the composer. The GND record of Johanan ben Zakkai had a page of its own
         jl:mergedInto <http://data.judaicalink.org/data/ep/1005344> ;
         jl:mergeDate "2026-10-12"^^xsd:date .
 
-#### jl:EntityPage
+**Replaced and deprecated identifiers.** An identifier that its source has replaced is stated with the source's own
+IRIs, `<old> dcterms:isReplacedBy <current>` (e.g. a GND number merged into another); one that the source has deleted
+without a successor as `<old> owl:deprecated true`. Our own IRIs are replaced the same way.
+
+#### jl:sameAs
 ```
-jl:EntityPage a owl:Class ;
-    rdfs:label "entity page"@en ;
-    rdfs:comment "The JudaicaLink resource for one person, place, organisation, work or subject, which brings together the records of the datasets about it (jl:represents). Its IRI stays stable; a page that turns out to be the same as another is merged into it (jl:mergedInto), one that turns out to stand for several entities is split (jl:splitInto), one that no longer stands for an entity is retired (jl:retiredDate)."@en .
+jl:sameAs
+    a owl:ObjectProperty ;
+    rdfs:label "same as (JudaicaLink)"@en, "identisch mit (JudaicaLink)"@de ;
+    rdfs:comment "The same entity, as stated by JudaicaLink (linksets, entities). Statements of sources use owl:sameAs."@en ;
+    rdfs:subPropertyOf owl:sameAs .
 ```
-#### jl:Place
+#### owl:sameAs
 ```
-jl:Place a owl:Class ;
-    rdfs:label "place"@en ;
-    rdfs:comment "A place: a settlement, region, country or other geographic entity. Used for records and entity pages."@en .
+owl:sameAs
+    jl:label "same as"@en, "identisch mit"@de ;
+    jl:comment "As stated by the sources of a dataset: their records are the same as these resources (other authority files, knowledge bases). JudaicaLink keeps these statements as given; its own identity statements are jl:sameAs."@en, "Wie von den Quellen eines Datensatzes angegeben: ihre Datensätze sind identisch mit diesen Ressourcen (andere Normdateien, Wissensbasen). JudaicaLink übernimmt diese Aussagen unverändert; eigene Identitätsaussagen sind jl:sameAs."@de ;
+    rdfs:domain owl:Thing ;
+    rdfs:range owl:Thing .
 ```
-#### jl:Work
+#### dcterms:isReplacedBy
 ```
-jl:Work a owl:Class ;
-    rdfs:label "work"@en ;
-    rdfs:comment "A work: a text, composition or other creation, as described by a record (e.g. a name-title authority record). Used for records and entity pages."@en .
+dcterms:isReplacedBy
+    jl:label "replaced by"@en, "ersetzt durch"@de ;
+    jl:comment "An identifier replaced by another, by its source (e.g. a merged GND number) or by us (a new IRI). Only replacements between our own IRIs count as identity."@en, "Ein Identifikator, der durch einen anderen ersetzt ist: ein Identifikator einer Quelle, den die Quelle ersetzt hat (z. B. eine zusammengeführte GND-Nummer, mit den IRIs der Quelle), oder eine unserer IRIs, die durch eine neue ersetzt ist (z. B. wenn ein Datensatz neu aus seiner Quelle erzeugt wird)."@de .
 ```
-#### jl:Subject
+#### owl:deprecated
 ```
-jl:Subject a owl:Class ;
-    rdfs:label "subject"@en ;
-    rdfs:comment "A subject: a topic or concept that is the entity of an entity page, e.g. described by an article of an encyclopedia."@en .
+owl:deprecated
+    jl:label "deprecated"@en, "veraltet"@de ;
+    jl:comment "An identifier that is no longer valid and has no successor: deleted by its source, or an IRI of ours that could not be assigned to a new record."@en, "Ein Identifikator, der nicht mehr gültig ist und keinen Nachfolger hat: von seiner Quelle gelöscht, oder eine unserer IRIs, die keinem neuen Datensatz zugeordnet werden konnte."@de ;
+    rdfs:domain rdfs:Resource ;
+    rdfs:range rdfs:Resource .
 ```
-#### jl:represents
+#### prov:wasDerivedFrom
 ```
-jl:represents
-    a rdf:Property ;
-    rdfs:label "represents"@en ;
-    rdfs:comment "A record of a dataset that the entity page brings together. All records that an entity page represents describe the same entity; the facts on the page are chosen from them."@en ;
-    rdfs:domain jl:EntityPage ;
-    rdfs:range jl:Resource .
+prov:wasDerivedFrom
+    jl:label "derived from"@en, "abgeleitet von"@de ;
+    jl:comment "A legacy IRI of JudaicaLink and the records it was made from (the person IRIs of the former nli-persons, dataset ls-nli-legacy)."@en, "Eine ältere IRI von JudaicaLink und die Datensätze, aus denen sie gebildet wurde (die Personen-IRIs des früheren nli-persons, Datensatz ls-nli-legacy)."@de ;
+    rdfs:domain prov:Entity ;
+    rdfs:range prov:Entity .
 ```
 #### jl:mergedInto
 ```
 jl:mergedInto
     a rdf:Property ;
-    rdfs:label "merged into"@en ;
-    rdfs:comment "The entity page into which this former entity page was merged. Both stand for the same entity, so this IRI can be redirected to it; chains of merges are followed. Stated with jl:mergeDate."@en ;
-    rdfs:range jl:EntityPage .
+    rdfs:label "merged into"@en, "zusammengeführt mit"@de ;
+    rdfs:comment "The IRI of the entity into which the entity of this IRI was merged: both stand for the same entity, so this IRI can be redirected to it; chains of merges are followed. Stated with jl:mergeDate."@en .
 ```
 #### jl:mergeDate
 ```
 jl:mergeDate
     a rdf:Property ;
-    rdfs:label "merge date"@en ;
-    rdfs:comment "The date of the version of the entity pages in which this entity page was merged into another (jl:mergedInto)."@en ;
+    rdfs:label "merge date"@en, "Datum der Zusammenführung"@de ;
+    rdfs:comment "The date of the version of the entities (dataset ep) in which this IRI was merged into another (jl:mergedInto)."@en ;
     rdfs:range xsd:date .
 ```
 #### jl:splitInto
 ```
 jl:splitInto
     a rdf:Property ;
-    rdfs:label "split into"@en ;
-    rdfs:comment "An entity page into which this former entity page was split: it turned out to stand for several entities, which were not known to be different when it was made. Each part has its own entity page (one statement per part); the IRI is not redirected, as it has several targets. Stated with jl:splitDate."@en ;
-    rdfs:range jl:EntityPage .
+    rdfs:label "split into"@en, "aufgeteilt in"@de ;
+    rdfs:comment "An IRI into which the entity of this IRI was split: it turned out to stand for several entities, which were not known to be different when it was made. Each part has its own IRI (one statement per part); this IRI is not redirected, as it has several targets. Stated with jl:splitDate."@en .
 ```
 #### jl:splitDate
 ```
 jl:splitDate
     a rdf:Property ;
-    rdfs:label "split date"@en ;
-    rdfs:comment "The date of the version of the entity pages in which this entity page was split (jl:splitInto)."@en ;
+    rdfs:label "split date"@en, "Datum der Aufteilung"@de ;
+    rdfs:comment "The date of the version of the entities (dataset ep) in which this IRI was split (jl:splitInto)."@en ;
     rdfs:range xsd:date .
 ```
 #### jl:retiredDate
 ```
 jl:retiredDate
     a rdf:Property ;
-    rdfs:label "retired date"@en ;
-    rdfs:comment "The date of the version of the entity pages from which this IRI is no longer an entity page, because its records are not persons, places, organisations, works or subjects (e.g. a mention or a page of a journal). The IRI stays resolvable and is never used again."@en ;
+    rdfs:label "retired date"@en, "Datum der Stilllegung"@de ;
+    rdfs:comment "The date of the version of the entities (dataset ep) from which this IRI no longer stands for an entity, because its records are not persons, places, organisations, works or subjects (e.g. a mention or a page of a journal). The IRI stays resolvable and is never used again."@en ;
     rdfs:range xsd:date .
 ```
+#### jl:referTo
+```
+jl:referTo
+    a rdf:Property ;
+    rdfs:label "refer to"@en ;
+    rdfs:comment "Used for redirection of one concept to another concept mostly in encyclopedias (when there is a name change or other reasons)"@en ;
+    rdfs:range skos:Concept .
+```
 
+### Classes
 
-### Person
+What a record or an entity is. JudaicaLink uses one class of the common layer per kind of entity, from established
+vocabularies: `foaf:Person`, `foaf:Organization`, `schema:Place`, `schema:CreativeWork` (works) and `skos:Concept`
+(subjects); the classes of the sources (e.g. `gndo:DifferentiatedPerson`, `madsrdf:PersonalName`) stay alongside.
+Classes of our own only where no established class fits (Compact Memory: pages, references, corpus presence).
 
-Class: foaf:Person
+#### rdf:type
+```
+rdf:type
+    jl:label "type"@en, "Typ"@de ;
+    jl:comment "The class of a record or entity: one of the classes of the common layer (foaf:Person, foaf:Organization, schema:Place, schema:CreativeWork, skos:Concept), and the classes of the source."@en, "Die Klasse eines Datensatzes oder einer Entität: eine der Klassen der gemeinsamen Schicht (foaf:Person, foaf:Organization, schema:Place, schema:CreativeWork, skos:Concept) und die Klassen der Quelle."@de ;
+    rdfs:domain rdfs:Resource ;
+    rdfs:range rdfs:Class .
+```
+#### foaf:Person
+```
+foaf:Person
+    jl:label "person"@en, "Person"@de ;
+    jl:comment "A person (also a family or a pseudonym where the source treats it as a person)."@en, "Eine Person (auch eine Familie oder ein Pseudonym, wo die Quelle sie als Person behandelt)."@de .
+```
+#### foaf:Organization
+```
+foaf:Organization
+    jl:label "organisation"@en, "Organisation"@de ;
+    jl:comment "An organisation: an institution, a congregation, a company, an association."@en, "Eine Organisation: eine Institution, eine Gemeinde, ein Unternehmen, ein Verein."@de .
+```
+#### schema:Place
+```
+schema:Place
+    jl:label "place"@en, "Ort"@de ;
+    jl:comment "The class for places, in records and entities."@en, "Ein Ort: eine Siedlung, Region, ein Land oder eine andere geografische Einheit (schema.org: Entitäten mit einer einigermaßen festen, physischen Ausdehnung). Die Klasse der gemeinsamen Schicht für Orte, in Datensätzen und Entitäten; ersetzt jl:Place."@de .
+```
+#### schema:CreativeWork
+```
+schema:CreativeWork
+    jl:label "work"@en, "Werk"@de ;
+    jl:comment "The class for works (texts, compositions, …), in records and entities."@en, "Ein Werk: ein Text, eine Komposition oder eine andere Schöpfung, wie von einem Datensatz beschrieben (z. B. einem Werktitel-Normdatensatz); schema.org: die allgemeinste Art eines kreativen Werks. Die Klasse der gemeinsamen Schicht für Werke, in Datensätzen und Entitäten; ersetzt jl:Work."@de .
+```
+#### skos:Concept
+```
+skos:Concept
+    jl:label "concept"@en, "Begriff"@de ;
+    jl:comment "The class for subjects: encyclopedia articles about topics, terms of source vocabularies."@en, "Ein Thema: ein Artikel oder Eintrag einer Enzyklopädie, der von einem Thema statt von einer Person, einem Ort oder Werk handelt (yivo, rujen, djh), oder ein Begriff eines Vokabulars einer Quelle (haskala). Die Klasse der gemeinsamen Schicht für Themen, in Datensätzen und Entitäten; ersetzt jl:Subject."@de .
+```
+#### gndo:Work
+```
+gndo:Work
+    jl:label "work (GND)"@en, "Werk (GND)"@de ;
+    jl:comment "A work, in the class of the GND ontology, used by datasets that describe works in the terms of the GND (footprints, nrwbibdjg)."@en, "Ein Werk, in der Klasse der GND-Ontologie, verwendet von Datensätzen, die Werke in den Begriffen der GND beschreiben (footprints, nrwbibdjg)."@de .
+```
+#### gndo:PlaceOrGeographicName
+```
+gndo:PlaceOrGeographicName
+    jl:label "place (GND)"@en, "Geografikum (GND)"@de ;
+    jl:comment "A place, in the class of the GND ontology, used by datasets that describe places in the terms of the GND (footprints, hhkeydocs)."@en, "Ein Ort, in der Klasse der GND-Ontologie, verwendet von Datensätzen, die Orte in den Begriffen der GND beschreiben (footprints, hhkeydocs)."@de .
+```
 
-#### gnd:gndIdentifier
+### Names and labels
+
+#### skos:prefLabel
+```
+skos:prefLabel
+    jl:label "name"@en, "Name"@de ;
+    jl:comment "The preferred name of a record or entity, as given by its source (one per language or script where the source gives several); entities choose one from their records."@en, "Der bevorzugte Name eines Datensatzes oder einer Entität, wie von der Quelle angegeben (einer je Sprache oder Schrift, wo die Quelle mehrere angibt); Entitäten wählen einen aus ihren Datensätzen."@de .
+```
+#### skos:altLabel
+```
+skos:altLabel
+    jl:label "other names"@en, "andere Namen"@de ;
+    jl:comment "Other names, spellings and forms of a name, as given by the source."@en, "Andere Namen, Schreibweisen und Namensformen, wie von der Quelle angegeben."@de .
+```
+#### rdfs:label
+```
+rdfs:label
+    jl:label "label"@en, "Bezeichnung"@de ;
+    jl:comment "A label as given by the source (e.g. the heading of an entry as printed); the name used by JudaicaLink is skos:prefLabel."@en, "Eine Bezeichnung, wie von der Quelle angegeben (z. B. die Überschrift eines Eintrags wie gedruckt); der von JudaicaLink verwendete Name ist skos:prefLabel."@de ;
+    rdfs:domain rdfs:Resource ;
+    rdfs:range rdfs:Literal .
+```
+#### foaf:name
+```
+foaf:name
+    jl:label "name (as given)"@en, "Name (wie angegeben)"@de ;
+    jl:comment "The name of a person or organisation as the source gives it; most datasets state skos:prefLabel next to it."@en, "Der Name einer Person oder Organisation, wie die Quelle ihn angibt; die meisten Datensätze geben skos:prefLabel daneben an."@de ;
+    rdfs:domain owl:Thing ;
+    rdfs:range rdfs:Literal .
+```
+#### dc:title
+```
+dc:title
+    jl:label "title"@en, "Titel"@de ;
+    jl:comment "The title of a work (footprints, nrwbibdjg)."@en, "Der Titel eines Werks (footprints, nrwbibdjg)."@de .
+```
+#### jl:title
+```
+jl:title
+    a rdf:Property ;
+    rdfs:label "title"@en, "Titel"@de ;
+    rdfs:comment "Title of a resource, such as a document, work, or dataset."@en ;
+    rdfs:range rdfs:Literal .
+```
+
+### Descriptions, sources and identifiers
+
+#### jl:describedAt
+```
+jl:describedAt
+    a rdf:Property ;
+    rdfs:label "described at"@en, "beschrieben auf"@de ;
+    rdfs:comment "The web page of the source that describes the record (e.g. the article of an encyclopedia, the entry of a database)."@en ;
+    rdfs:range foaf:Document .
+```
+#### jl:hasAbstract
+```
+jl:hasAbstract
+    a rdf:Property ;
+    rdfs:label "has abstract"@en, "Kurzbeschreibung"@de ;
+    rdfs:comment "The abstract of the article in which the concept or the person is described "@en ;
+    rdfs:range rdfs:Literal .
+```
+#### rdfs:seeAlso
+```
+rdfs:seeAlso
+    jl:label "see also"@en, "siehe auch"@de ;
+    jl:comment "A web page with further information that is not a data resource (e.g. an entry in a memorial book, an image)."@en, "Eine Webseite mit weiteren Informationen, die keine Datenressource ist (z. B. ein Eintrag in einem Gedenkbuch, ein Bild)."@de ;
+    rdfs:domain rdfs:Resource ;
+    rdfs:range rdfs:Resource .
+```
+#### foaf:isPrimaryTopicOf
+```
+foaf:isPrimaryTopicOf
+    jl:label "described in"@en, "beschrieben in"@de ;
+    jl:comment "A document whose primary topic is the record or entity, e.g. its Wikipedia article (geonames, cm-entities, wikidata)."@en, "Ein Dokument, dessen Hauptthema der Datensatz oder die Entität ist, z. B. sein Wikipedia-Artikel (geonames, cm-entities, wikidata)."@de ;
+    rdfs:domain owl:Thing ;
+    rdfs:range foaf:Document .
+```
+#### foaf:primaryTopic
+```
+foaf:primaryTopic
+    jl:label "primary topic"@en, "Hauptthema"@de ;
+    jl:comment "The primary topic of a document (the inverse of foaf:isPrimaryTopicOf)."@en, "Das Hauptthema eines Dokuments (die Umkehrung von foaf:isPrimaryTopicOf)."@de ;
+    rdfs:domain foaf:Document ;
+    rdfs:range owl:Thing .
+```
+#### rdfs:comment
+```
+rdfs:comment
+    jl:label "comment"@en, "Kommentar"@de ;
+    jl:comment "A comment of the source on a record or term."@en, "Ein Kommentar der Quelle zu einem Datensatz oder Begriff."@de ;
+    rdfs:domain rdfs:Resource ;
+    rdfs:range rdfs:Literal .
+```
+#### dcterms:identifier
+```
+dcterms:identifier
+    jl:label "identifier"@en, "Kennung"@de ;
+    jl:comment "The identifier of the record in its source (e.g. a record number of a database), as text."@en, "Der Identifikator des Datensatzes in seiner Quelle (z. B. eine Satznummer einer Datenbank), als Text."@de ;
+    rdfs:range rdfs:Literal .
+```
+#### gndo:gndIdentifier
 ```
 gndo:gndIdentifier
-    a rdf:Property ;
-    rdfs:label "gnd identifier"@en ;
-    rdfs:comment "The identifier of the person or concept in the Integrated Authority File of the German National Library (GND)"@en ;
+    jl:label "GND number"@en, "GND-Nummer"@de ;
+    jl:comment "The GND number of the record, as text; ls-gnd links the record to our record of the GND entry."@en, "Die GND-Nummer des Datensatzes, als Text; ls-gnd verknüpft den Datensatz mit unserem Datensatz des GND-Eintrags."@de ;
     rdfs:range rdfs:Literal .
 ```
-#### jl:birthDate
+#### dcterms:type
 ```
-jl:birthDate
-    a rdf:Property ;
-    rdfs:label "birth date"@en ;
-    rdfs:comment "The date of birth of the person "@en ;
+dcterms:type
+    jl:label "type"@en, "Art"@de ;
+    jl:comment "The kind of a resource from a controlled vocabulary of JudaicaLink (e.g. the kind of a dataset, the kind of a quality annotation)."@en, "Die Art einer Ressource aus einem kontrollierten Vokabular von JudaicaLink (z. B. die Art eines Datensatzes, die Art einer Qualitätsannotation)."@de .
+```
+#### dcterms:created
+```
+dcterms:created
+    jl:label "created"@en, "erstellt"@de ;
+    jl:comment "The date of creation of a resource as given by its source."@en, "Das Erstellungsdatum einer Ressource, wie von der Quelle angegeben."@de ;
     rdfs:range rdfs:Literal .
 ```
-#### jl:birthYear
+#### dcterms:subject
 ```
-jl:birthYear
-    a rdf:Property ;
-    rdfs:label "birth year"@en ;
-    rdfs:comment "The year of birth of the person."@en ;
-    rdfs:range xsd:gYear .
+dcterms:subject
+    jl:label "subject"@en, "Thema"@de ;
+    jl:comment "The topic of a resource (a category or subject heading of the source)."@en, "Das Thema einer Ressource (eine Kategorie oder ein Schlagwort der Quelle)."@de .
 ```
-#### jl:deathDate
+#### dc:subject
 ```
-jl:deathDate
-    a rdf:Property ;
-    rdfs:label "death date"@en ;
-    rdfs:comment "The date of death of the person"@en ;
-    rdfs:range rdfs:Literal .
+dc:subject
+    jl:label "subject"@en, "Thema"@de ;
+    jl:comment "The topic of a resource as text (hirsch-family, stolpersteine)."@en, "Das Thema einer Ressource als Text (hirsch-family, stolpersteine)."@de .
 ```
-#### jl:deathYear
-```
-jl:deathYear
-    a rdf:Property ;
-    rdfs:label "death year"@en ;
-    rdfs:comment "The year of death of the person."@en ;
-    rdfs:range xsd:gYear .
-```
-Normalised dates: `jl:birthDate` and `jl:deathDate` are free text as given by the sources. A complementary dataset
-(records-normalized) adds typed values next to them, so that dates can be compared and sorted; the original values
-stay. Example (a record of djh):
+
+### Persons
+
+Dates and places as given: `jl:birthDate`, `jl:deathDate`, `jl:birthLocation` and `jl:deathLocation` are free text
+as given by the sources. A complementary dataset (records-normalized) adds typed values next to the dates, so that
+dates can be compared and sorted; the original values stay. The places are given as IRIs where the source or an
+enrichment gives one (`jl:birthLocationURI`, `jl:deathLocationURI`). Example (a record of djh):
 
     <http://data.judaicalink.org/data/djh/abudiente-mose-gideon>
         jl:birthDate "ca. 1610" ;
@@ -335,11 +408,27 @@ stay. Example (a record of djh):
         jl:deathDate "4.3.1688" ;
         jl:deathDateNormalized "1688-03-04"^^xsd:date .
 
+#### jl:birthDate
+```
+jl:birthDate
+    a rdf:Property ;
+    rdfs:label "birth date"@en, "Geburtsdatum"@de ;
+    rdfs:comment "The date of birth as written by the source (text), e.g. \"um 1820\"; jl:birthDateNormalized gives the typed value."@en ;
+    rdfs:range rdfs:Literal .
+```
+#### jl:deathDate
+```
+jl:deathDate
+    a rdf:Property ;
+    rdfs:label "death date"@en, "Sterbedatum"@de ;
+    rdfs:comment "The date of death as written by the source (text), e.g. \"um 1820\"; jl:deathDateNormalized gives the typed value."@en ;
+    rdfs:range rdfs:Literal .
+```
 #### jl:birthDateNormalized
 ```
 jl:birthDateNormalized
     a rdf:Property ;
-    rdfs:label "normalised birth date"@en ;
+    rdfs:label "normalised birth date"@en, "normalisiertes Geburtsdatum"@de ;
     rdfs:comment "The birth date of the person as xsd:date, xsd:gYearMonth or xsd:gYear, derived from the free text of jl:birthDate, which stays as it is."@en ;
     rdfs:range rdfs:Literal .
 ```
@@ -347,7 +436,7 @@ jl:birthDateNormalized
 ```
 jl:birthDateUncertain
     a rdf:Property ;
-    rdfs:label "birth date uncertain"@en ;
+    rdfs:label "birth date uncertain"@en, "Geburtsdatum unsicher"@de ;
     rdfs:comment "True if the source marks the birth date as uncertain or approximate (e.g. ca., ?) or if it was converted from a Hebrew year, which spans two Gregorian years."@en ;
     rdfs:range xsd:boolean .
 ```
@@ -355,7 +444,7 @@ jl:birthDateUncertain
 ```
 jl:deathDateNormalized
     a rdf:Property ;
-    rdfs:label "normalised death date"@en ;
+    rdfs:label "normalised death date"@en, "normalisiertes Sterbedatum"@de ;
     rdfs:comment "The death date of the person as xsd:date, xsd:gYearMonth or xsd:gYear, derived from the free text of jl:deathDate, which stays as it is."@en ;
     rdfs:range rdfs:Literal .
 ```
@@ -363,55 +452,74 @@ jl:deathDateNormalized
 ```
 jl:deathDateUncertain
     a rdf:Property ;
-    rdfs:label "death date uncertain"@en ;
+    rdfs:label "death date uncertain"@en, "Sterbedatum unsicher"@de ;
     rdfs:comment "True if the source marks the death date as uncertain or approximate (e.g. ca., ?) or if it was converted from a Hebrew year, which spans two Gregorian years."@en ;
     rdfs:range xsd:boolean .
 ```
-#### jl:birthLocation 
+#### jl:birthLocation
 ```
-jl:birthLocation 
+jl:birthLocation
     a rdf:Property ;
-    rdfs:label "birth location"@en ;
-    rdfs:comment "The location of birth of the person"@en ;
+    rdfs:label "place of birth"@en, "Geburtsort"@de ;
+    rdfs:comment "The place of birth of the person, as given by the source (text)."@en ;
     rdfs:range rdfs:Literal .
 ```
 #### jl:birthLocationURI
 ```
 jl:birthLocationURI
     a rdf:Property ;
-    rdfs:label "birth location URI"@en ;
+    rdfs:label "place of birth (IRI)"@en, "Geburtsort (IRI)"@de ;
     rdfs:comment "URI of the place of birth of the person."@en ;
-    rdfs:range rdfs:Resource .
+    rdfs:range rdfs:Resource ;
+    owl:equivalentProperty wdt:P19 .
 ```
-#### jl:deathLocation 
+#### jl:deathLocation
 ```
-jl:deathLocation 
+jl:deathLocation
     a rdf:Property ;
-    rdfs:label "death location"@en ;
-    rdfs:comment "The location of death of the person"@en ;
+    rdfs:label "place of death"@en, "Sterbeort"@de ;
+    rdfs:comment "The place of death of the person, as given by the source (text)."@en ;
     rdfs:range rdfs:Literal .
 ```
 #### jl:deathLocationURI
 ```
 jl:deathLocationURI
     a rdf:Property ;
-    rdfs:label "death location URI"@en ;
+    rdfs:label "place of death (IRI)"@en, "Sterbeort (IRI)"@de ;
     rdfs:comment "URI of the place of death of the person."@en ;
-    rdfs:range rdfs:Resource .
+    rdfs:range rdfs:Resource ;
+    owl:equivalentProperty wdt:P20 .
+```
+#### jl:burialLocation
+```
+jl:burialLocation
+    a rdf:Property ;
+    rdfs:label "place of burial"@en, "Begräbnisort"@de ;
+    rdfs:comment "The place of burial of the person, as given by the source (text)."@en ;
+    rdfs:range rdfs:Literal .
+```
+#### jl:burialLocationURI
+```
+jl:burialLocationURI
+    a rdf:Property ;
+    rdfs:label "place of burial (IRI)"@en, "Begräbnisort (IRI)"@de ;
+    rdfs:comment "URI of the place of burial of the person."@en ;
+    rdfs:range rdfs:Resource ;
+    owl:equivalentProperty wdt:P119 .
 ```
 #### jl:occupation
 ```
 jl:occupation
     a rdf:Property ;
-    rdfs:label "occupation"@en ;
-    rdfs:comment "The occupation of the person "@en ;
+    rdfs:label "occupation"@en, "Beruf"@de ;
+    rdfs:comment "The occupation of the person, as given by the source (text)."@en ;
     rdfs:range rdfs:Literal .
 ```
 #### jl:occupationURI
 ```
 jl:occupationURI
     a rdf:Property ;
-    rdfs:label "occupation URI"@en ;
+    rdfs:label "occupation (IRI)"@en, "Beruf (IRI)"@de ;
     rdfs:comment "The occupation of the person as an IRI, e.g. an occupation concept; jl:occupation is the occupation as text (as jl:birthLocationURI is the place of birth as an IRI next to jl:birthLocation)."@en ;
     rdfs:range rdfs:Resource .
 ```
@@ -419,266 +527,187 @@ jl:occupationURI
 ```
 jl:grandparent
     a rdf:Property ;
-    rdfs:label "grandparent"@en ;
-    rdfs:comment "A grandparent of the person; the subject is the grandchild, as with schema:parent the subject is the child. For family relations JudaicaLink uses schema:parent, schema:spouse and schema:sibling; schema.org has no term for grandparents. Used where a source states the relation directly (e.g. the inscriptions of Epidat), also when the parent in between is not in the data."@en ;
+    rdfs:label "grandparent"@en, "Großelternteil"@de ;
+    rdfs:comment "A grandparent of the person; the subject is the grandchild, as with schema:parent. schema.org has no term for grandparents."@en ;
     rdfs:range foaf:Person .
 ```
 #### jl:hasPublication
 ```
 jl:hasPublication
     a rdf:Property ;
-    rdfs:label "has publication"@en ;
+    rdfs:label "publication"@en, "Publikation"@de ;
     rdfs:comment "The publications of the person"@en ;
     rdfs:range rdfs:Literal .
 ```
-
-### Document
-
-Class: foaf:Document
-
-#### foaf:primaryTopic
+#### foaf:gender
 ```
-foaf:primaryTopic
-    a rdf:Property ;
-    rdfs:label "primary topic"@en ;
-    rdfs:comment "The primary topic of some page or document"@en ;
-    rdfs:range owl:Thing .
-```
-#### rdfs:label
-```
-rdfs:label
-    a rdf:Property ;
-    rdfs:label "label"@en ;
-    rdfs:comment "used to provide a human-readable version of a resource's name"@en ;
-    rdfs:range rdfs:Literal .
-```
-#### dcterms:created
-```
-dcterms:created
-    a rdf:Property ;
-    rdfs:label "created"@en ;
-    rdfs:comment "Date of creation of the resource"@en ;
+foaf:gender
+    jl:label "gender"@en, "Geschlecht"@de ;
+    jl:comment "The gender of a person as given by the source."@en, "Das Geschlecht einer Person, wie von der Quelle angegeben."@de ;
+    rdfs:domain foaf:Agent ;
     rdfs:range rdfs:Literal .
 ```
 
+### Places
 
-#### jl:isOnPage
+#### geo:asWKT
 ```
-jl:isOnPage
-    a rdf:Property ;
-    rdfs:label "is on page"@en ;
-    rdfs:comment "Page or page range on which the resource (e.g. an article or reference) appears."@en ;
-    rdfs:range rdfs:Literal .
+geo:asWKT
+    jl:label "coordinates"@en, "Koordinaten"@de ;
+    jl:comment "The coordinates of a place as a point, written \"POINT(<longitude> <latitude>)\"^^geo:wktLiteral. GeoSPARQL defines the property for geometries; JudaicaLink states it on the place itself (the dataset gnd keeps the GND's geometry nodes as given)."@en, "Die Koordinaten eines Orts als Punkt, geschrieben \"POINT(<Länge> <Breite>)\"^^geo:wktLiteral. GeoSPARQL definiert die Eigenschaft für Geometrien; JudaicaLink gibt sie direkt beim Ort an."@de ;
+    rdfs:domain geo:Geometry ;
+    rdfs:range geo:wktLiteral .
+```
+#### gndo:hierarchicalSuperiorOfPlaceOrGeographicName
+```
+gndo:hierarchicalSuperiorOfPlaceOrGeographicName
+    jl:label "part of (place)"@en, "Teil von (Ort)"@de ;
+    jl:comment "The place of which a place is a part, as given by the source (footprints, hhkeydocs)."@en, "Der Ort, zu dem ein Ort gehört, wie von der Quelle angegeben (footprints, hhkeydocs)."@de ;
+    rdfs:domain gndo:PlaceOrGeographicName ;
+    rdfs:range gndo:PlaceOrGeographicName .
 ```
 
-### Annotation
+### Works and organisations
 
-Class:Annotations
+#### gndo:author
+```
+gndo:author
+    jl:label "author"@en, "Verfasser"@de ;
+    jl:comment "The author of a work (footprints, nrwbibdjg)."@en, "Der Verfasser eines Werks (footprints, nrwbibdjg)."@de ;
+    rdfs:domain gndo:Work .
+```
+#### gndo:dateOfEstablishment
+```
+gndo:dateOfEstablishment
+    jl:label "date of establishment"@en, "Gründungsdatum"@de ;
+    jl:comment "The date of establishment of an organisation, as given by the source (hhkeydocs, nrwbibdjg)."@en, "Das Gründungsdatum einer Organisation, wie von der Quelle angegeben (hhkeydocs, nrwbibdjg)."@de .
+```
+#### gndo:dateOfTermination
+```
+gndo:dateOfTermination
+    jl:label "date of termination"@en, "Auflösungsdatum"@de ;
+    jl:comment "The date of termination of an organisation, as given by the source (hhkeydocs, nrwbibdjg)."@en, "Das Auflösungsdatum einer Organisation, wie von der Quelle angegeben (hhkeydocs, nrwbibdjg)."@de .
+```
 
-#### jl:Annotation
-```
-jl:Annotation a owl:Class ;
-  rdfs:label "Annotation" .
-```
-#### jl:text
-```
-jl:text a owl:DatatypeProperty ;
-  rdfs:label "Text" ;
-  rdfs:domain jl:Annotations ;
-  rdfs:range xsd:string .
-```
-#### jl:uuid
-```
-jl:uuid a owl:DatatypeProperty ;
-  rdfs:label "UUID" ;
-  rdfs:domain jl:Annotations ;
-  rdfs:range xsd:string .
-```
-#### jl:status
-```
-jl:status a owl:DatatypeProperty ;
-  rdfs:label "Status" ;
-  rdfs:domain jl:Annotations ;
-  rdfs:range xsd:string .
-```
-#### jl:published
-```
-jl:published a owl:DatatypeProperty ;
-  rdfs:label "Published" ;
-  rdfs:domain jl:Annotations ;
-  rdfs:range xsd:boolean .
-```
-#### jl:issue-url
-```
-jl:issue-url a owl:ObjectProperty ;
-  rdfs:label "Issue URL" ;
-  rdfs:domain jl:Annotations ;
-  rdfs:range xsd:anyURI .
-```
-#### jl:tag
-```
-jl:tag a owl:DatatypeProperty ;
-  rdfs:label "Tag" ;
-  rdfs:domain jl:Annotations ;
-  rdfs:range rdfs:Literal .
-```
-#### jl:user
-```
-jl:user a owl:DatatypeProperty ;
-  rdfs:label "User" ;
-  rdfs:domain jl:Annotations ;
-  rdfs:range xsd:string .
-```
-#### jl:timestamp
-```
-jl:timestamp a owl:DatatypeProperty ;
-  rdfs:label "Timestamp" ;
-  rdfs:domain jl:Annotations ;
-  rdfs:range xsd:dateTime .
-```
-#### jl:ip
-```
-jl:ip a owl:DatatypeProperty ;
-  rdfs:label "IP" ;
-  rdfs:domain jl:Annotations ;
-  rdfs:range xsd:string .
-```
-### Dataset
+### Concepts
 
-Class: jl:Dataset
+#### skos:related
+```
+skos:related
+    jl:label "related"@en, "verwandt"@de ;
+    jl:comment "A related article or concept of the same source (cross-references of an encyclopedia)."@en, "Ein verwandter Artikel oder Begriff derselben Quelle (Querverweise einer Enzyklopädie)."@de .
+```
+#### skos:broader
+```
+skos:broader
+    jl:label "broader"@en, "übergeordnet"@de ;
+    jl:comment "A broader concept of the same source (e.g. the article of which an entry is a section)."@en, "Ein übergeordneter Begriff derselben Quelle (z. B. der Artikel, zu dem ein Eintrag ein Abschnitt ist)."@de .
+```
+#### skos:narrower
+```
+skos:narrower
+    jl:label "narrower"@en, "untergeordnet"@de ;
+    jl:comment "A narrower concept of the same source."@en, "Ein untergeordneter Begriff derselben Quelle."@de .
+```
+#### skos:scopeNote
+```
+skos:scopeNote
+    jl:label "scope note"@en, "Anwendungshinweis"@de ;
+    jl:comment "A note on the scope of a concept, as given by the source."@en, "Ein Hinweis auf den Anwendungsbereich eines Begriffs, wie von der Quelle angegeben."@de .
+```
 
-#### jl:hasDescription
+### Annotations
+
+Quality annotations: statements about the data (e.g. a date that cannot be read, an identifier that leads to several
+records), made by checks of JudaicaLink (datasets quality-annotations, ls-nli-legacy).
+
+#### oa:Annotation
 ```
-jl:datasetName a owl:DatatypeProperty ;
-    rdfs:label "Desciption for the Dataset" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:Literal .
+oa:Annotation
+    jl:label "annotation"@en, "Annotation"@de ;
+    jl:comment "An annotation of a resource or of a statement of the data."@en, "Eine Annotation einer Ressource oder einer Aussage der Daten."@de .
 ```
-#### jl:hasFiles
+#### dqv:QualityAnnotation
 ```
-jl:datasetName a owl:DatatypeProperty ;
-    rdfs:label "The files for the Dataset" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:Literal .
+dqv:QualityAnnotation
+    jl:label "quality annotation"@en, "Qualitätsannotation"@de ;
+    jl:comment "An annotation about the quality of the data (a problem found by a check)."@en, "Eine Annotation zur Qualität der Daten (ein Problem, das eine Prüfung gefunden hat)."@de .
 ```
-#### jl:hasTitle
+#### oa:hasTarget
 ```
-jl:hasTitle
-    a owl:DatatypeProperty ;
-    rdfs:label "title of the dataset"@en ;
-    rdfs:comment "The human-readable title of the dataset."@en ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:Literal .
+oa:hasTarget
+    jl:label "target"@en, "Ziel"@de ;
+    jl:comment "The resource (record, version of a dataset) that the annotation is about."@en, "Die Ressource (Datensatz, Version eines Datensatzes), auf die sich die Annotation bezieht."@de ;
+    rdfs:domain oa:Annotation .
 ```
-#### jl:createdAt
+#### oa:bodyValue
 ```
-jl:datasetName a owl:DatatypeProperty ;
-    rdfs:label "Created at" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:xsdDate .
-```
-#### jl:hasAuthor
-```
-jl:datasetName a owl:DatatypeProperty ;
-    rdfs:label "Creator Name" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:Literal .
-```
-#### jl:hasAuthorEmail
-```
-jl:datasetName a owl:DatatypeProperty ;
-    rdfs:label "Creator Email" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:Literal .
-```
-#### jl:hasAuthorlink
-```
-jl:hasAuthorlink a owl:ObjectProperty ;
-    rdfs:label "hasAuthorLink" ;
-    rdfs:comment "Link to an external author page or authority record (e.g. ORCID, GND, VIAF, university profile)."@en ;
-    rdfs:domain jl:Resource ;
-    rdfs:range rdfs:Resource .
-```
-#### jl:hasDescription
-```
-jl:datasetName a owl:DatatypeProperty ;
-    rdfs:label "Description" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:Literal .
-```
-#### jl:hasSlug
-```
-jl:datasetName a owl:DatatypeProperty ;
-    rdfs:label "Slug" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:Literal .
-```
-#### jl:hasGraph
-```
-jl:datasetName a owl:DatatypeProperty ;
-    rdfs:label "Graph" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:Literal .
-```
-#### jl:isLoaded
-```
-jl:datasetName a owl:DatatypeProperty ;
-    rdfs:label "Is loaded" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:Boolean .
-```
-#### jl:hasCategory
-```
-jl:datasetName a owl:DatatypeProperty ;
-    rdfs:label "Category" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:Literal .
-```
-#### jl:hasExample
-```
-jl:datasetName a owl:DatatypeProperty ;
-    rdfs:label "Exmaple URI" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:URI .
-```
-#### jl:hasLicense
-```
-jl:datasetName a owl:DatatypeProperty ;
-    rdfs:label "License" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:Literal .
-```
-#### jl:hasSource
-```
-jl:datasetName a owl:DatatypeProperty ;
-    rdfs:label "Source URI" ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range rdfs:URI .
-```
-#### jl:gitCommit
-```
-jl:gitCommit
-    a owl:DatatypeProperty ;
-    rdfs:label "git commit"@en ;
-    rdfs:comment "Identifier of the Git commit from which this dataset or resource was generated."@en ;
-    rdfs:domain jl:Dataset ;
+oa:bodyValue
+    jl:label "text"@en, "Text"@de ;
+    jl:comment "The text of the annotation."@en, "Der Text der Annotation."@de ;
+    rdfs:domain oa:Annotation ;
     rdfs:range xsd:string .
 ```
-#### jl:gitWeb
+#### oa:motivatedBy
 ```
-jl:gitWeb
-    a owl:DatatypeProperty ;
-    rdfs:label "Git web URL"@en ;
-    rdfs:comment "Web URL of the Git repository or specific commit associated with this dataset or resource."@en ;
-    rdfs:domain jl:Dataset ;
-    rdfs:range xsd:anyURI .
+oa:motivatedBy
+    jl:label "motivation"@en, "Anlass"@de ;
+    jl:comment "Why the annotation was made (e.g. assessing the quality)."@en, "Warum die Annotation gemacht wurde (z. B. Bewertung der Qualität)."@de ;
+    rdfs:domain oa:Annotation ;
+    rdfs:range oa:Motivation .
 ```
-### Journal
-Class: jl:Journal
+
+### Compact Memory
+
+The journals of Compact Memory, their issues and pages, the references found in their full text, and how often
+entities are mentioned in it. The journals, issues and articles use classes of schema.org and properties of Dublin
+Core (see the dataset compact-memory); the terms below are JudaicaLink's own.
+
+#### jl:Page
 ```
-jl:Journal a owl:Class ;
-    rdfs:label "Journal"@en ;
-    rdfs:comment "A scholarly or academic journal in which publications or articles appear."@en .
+jl:Page a owl:Class ;
+    rdfs:label "Page"@en ;
+    rdfs:comment "A page or page range in a document or journal issue."@en .
+```
+#### jl:belongsToIssue
+```
+jl:belongsToIssue
+    a rdf:Property ;
+    rdfs:label "belongs to issue"@en ;
+    rdfs:comment "Links a publication or article to the specific journal issue in which it was published."@en ;
+    rdfs:range jl:Resource .
+```
+#### jl:belongsToJournal
+```
+jl:belongsToJournal
+    a rdf:Property ;
+    rdfs:label "belongs to journal"@en ;
+    rdfs:comment "Links a publication or article to the journal in which it was published."@en ;
+    rdfs:range jl:Resource .
+```
+#### jl:hasVisualRepresentation
+```
+jl:hasVisualRepresentation
+    a rdf:Property ;
+    rdfs:label "has visual representation"@en ;
+    rdfs:comment "Links a resource to a visual representation such as an image or illustration."@en ;
+    rdfs:range jl:Resource .
+```
+#### jl:pageSequence
+```
+jl:pageSequence
+    a rdf:Property ;
+    rdfs:label "page sequence"@en ;
+    rdfs:comment "Position of a page within its issue or volume in the Visual Library of UB Frankfurt."@en ;
+    rdfs:range xsd:integer .
+```
+#### jl:ocrKnownWordShare
+```
+jl:ocrKnownWordShare
+    a rdf:Property ;
+    rdfs:label "OCR known-word share"@en ;
+    rdfs:comment "Share of the words of a page that are found in a word list derived from the corpus; an estimate of the OCR quality."@en ;
+    rdfs:range xsd:decimal .
 ```
 #### jl:subtitle
 ```
@@ -720,86 +749,19 @@ jl:meanOcrKnownWordShare
     rdfs:comment "Mean of jl:ocrKnownWordShare over the pages of a journal."@en ;
     rdfs:range xsd:decimal .
 ```
-### Issue
-Class: jl:Issue
-#### jl:Issue
+#### jl:Reference
 ```
-jl:Issue a owl:Class ;
-    rdfs:label "Journal issue"@en ;
-    rdfs:comment "A specific issue of a journal, usually identified by volume, number and year."@en .
+jl:Reference a owl:Class ;
+    rdfs:label "Reference"@en ;
+    rdfs:comment "A bibliographic or in-text reference within a document, such as a citation or footnote."@en .
 ```
-#### jl:hasVisualRepresentation
+#### jl:isOnPage
 ```
-jl:hasVisualRepresentation
+jl:isOnPage
     a rdf:Property ;
-    rdfs:label "has visual representation"@en ;
-    rdfs:comment "Links a resource to a visual representation such as an image or illustration."@en ;
-    rdfs:range jl:Resource .
-```
-### Page
-Class: jl:Page
-### jl:Page
-```
-jl:Page a owl:Class ;
-    rdfs:label "Page"@en ;
-    rdfs:comment "A page or page range in a document or journal issue."@en .
-```
-#### jl:belongsToIssue
-```
-jl:belongsToIssue
-    a rdf:Property ;
-    rdfs:label "belongs to issue"@en ;
-    rdfs:comment "Links a publication or article to the specific journal issue in which it was published."@en ;
-    rdfs:range jl:Resource .
-```
-#### jl:belongsToJournal
-```
-jl:belongsToJournal
-    a rdf:Property ;
-    rdfs:label "belongs to journal"@en ;
-    rdfs:comment "Links a publication or article to the journal in which it was published."@en ;
-    rdfs:range jl:Resource .
-```
-#### jl:title
-```
-jl:title
-    a rdf:Property ;
-    rdfs:label "title"@en ;
-    rdfs:comment "Title of a resource, such as a document, work, or dataset."@en ;
+    rdfs:label "is on page"@en ;
+    rdfs:comment "Page or page range on which the resource (e.g. an article or reference) appears."@en ;
     rdfs:range rdfs:Literal .
-```
-#### jl:hasVisualRepresentation
-```
-jl:hasVisualRepresentation
-    a rdf:Property ;
-    rdfs:label "has visual representation"@en ;
-    rdfs:comment "Links a resource to a visual representation such as an image or illustration."@en ;
-    rdfs:range jl:Resource .
-```
-#### jl:pageSequence
-```
-jl:pageSequence
-    a rdf:Property ;
-    rdfs:label "page sequence"@en ;
-    rdfs:comment "Position of a page within its issue or volume in the Visual Library of UB Frankfurt."@en ;
-    rdfs:range xsd:integer .
-```
-#### jl:ocrKnownWordShare
-```
-jl:ocrKnownWordShare
-    a rdf:Property ;
-    rdfs:label "OCR known-word share"@en ;
-    rdfs:comment "Share of the words of a page that are found in a word list derived from the corpus; an estimate of the OCR quality."@en ;
-    rdfs:range xsd:decimal .
-```
-
-### Resource
-Class: jl:Resource
-#### jl:Resource
-```
-jl:Resource a owl:Class ;
-    rdfs:label "Resource"@en ;
-    rdfs:comment "Generic resource in the JudaicaLink knowledge graph (person, place, document, journal, issue, etc.)."@en .
 ```
 #### jl:hasReference
 ```
@@ -809,8 +771,48 @@ jl:hasReference
     rdfs:comment "Reference or citation associated with a resource (e.g. bibliographic reference in an article)."@en ;
     rdfs:range rdfs:Literal .
 ```
-### Corpus presence
-Class: jl:CorpusPresence
+#### jl:hasSpot
+```
+jl:hasSpot
+    a rdf:Property ;
+    rdfs:label "has spot"@en ;
+    rdfs:comment "Surface form (text span) in the source text that has been annotated."@en ;
+    rdfs:range rdfs:Literal .
+```
+#### jl:hasStart
+```
+jl:hasStart
+    a rdf:Property ;
+    rdfs:label "has start offset"@en ;
+    rdfs:comment "Start character offset of the annotated span in the source text."@en ;
+    rdfs:range xsd:integer .
+```
+#### jl:hasEnd
+```
+jl:hasEnd
+    a rdf:Property ;
+    rdfs:label "has end offset"@en ;
+    rdfs:comment "End character offset of the annotated span in the source text."@en ;
+    rdfs:range xsd:integer .
+```
+#### jl:hasRho
+```
+jl:hasRho
+    a rdf:Property ;
+    rdfs:label "has rho"@en ;
+    rdfs:comment "Confidence or relevance score (rho) of the annotation, as provided by the NLP tool."@en ;
+    rdfs:range xsd:decimal .
+```
+#### jl:hasLinkProb
+```
+jl:hasLinkProb
+    a rdf:Property ;
+    rdfs:label "has link probability"@en ;
+    rdfs:comment "Link probability or prior probability that the spotted text refers to the linked entity."@en ;
+    rdfs:range xsd:decimal .
+```
+
+#### Corpus presence
 
 How a resource of JudaicaLink occurs in a corpus of texts, e.g. how often and when a person is mentioned in the
 journals of Compact Memory. One node per resource and corpus links the two (`jl:entity`, `jl:corpus`) and carries the
@@ -841,7 +843,7 @@ jl:CorpusPresence a owl:Class ;
 jl:entity
     a rdf:Property ;
     rdfs:label "entity"@en ;
-    rdfs:comment "Points to the JudaicaLink resource that this node is about: any resource, e.g. a record such as http://data.judaicalink.org/data/yivo/Moscow, a journal or a page; not specifically an entity page."@en ;
+    rdfs:comment "Points to the JudaicaLink resource that this node is about: any resource, e.g. a record such as http://data.judaicalink.org/data/yivo/Moscow, a journal or a page; not specifically an entity of the dataset ep."@en ;
     rdfs:range rdfs:Resource .
 ```
 #### jl:corpus
@@ -900,69 +902,325 @@ jl:mostFrequentJournal
     rdfs:comment "The journal of the corpus with the most mentions of the resource (for corpora of periodicals)."@en ;
     rdfs:range jl:Resource .
 ```
-### Reference
-Class: jl:Reference
 
-#### jl:Reference
-```
-jl:Reference a owl:Class ;
-    rdfs:label "Reference"@en ;
-    rdfs:comment "A bibliographic or in-text reference within a document, such as a citation or footnote."@en .
-```
-#### jl:hasSpot
-```
-jl:hasSpot
-    a rdf:Property ;
-    rdfs:label "has spot"@en ;
-    rdfs:comment "Surface form (text span) in the source text that has been annotated."@en ;
-    rdfs:range rdfs:Literal .
-```
-#### jl:hasStart
-```
-jl:hasStart
-    a rdf:Property ;
-    rdfs:label "has start offset"@en ;
-    rdfs:comment "Start character offset of the annotated span in the source text."@en ;
-    rdfs:range xsd:integer .
-```
-#### jl:hasEnd
-```
-jl:hasEnd
-    a rdf:Property ;
-    rdfs:label "has end offset"@en ;
-    rdfs:comment "End character offset of the annotated span in the source text."@en ;
-    rdfs:range xsd:integer .
-```
-#### jl:hasRho
-```
-jl:hasRho
-    a rdf:Property ;
-    rdfs:label "has rho"@en ;
-    rdfs:comment "Confidence or relevance score (rho) of the annotation, as provided by the NLP tool."@en ;
-    rdfs:range xsd:decimal .
-```
-#### jl:hasLinkProb
-```
-jl:hasLinkProb
-    a rdf:Property ;
-    rdfs:label "has link probability"@en ;
-    rdfs:comment "Link probability or prior probability that the spotted text refers to the linked entity."@en ;
-    rdfs:range xsd:decimal .
-```
+### Datasets and metadata
 
-
-### Dataset statistics
-
-Statistics stated in the metadata of a dataset version (its `-meta` file), beside those of VoID.
+Every version of a dataset has a metadata file (`<slug>-meta.ttl.gz`) that describes it with VoID, DCAT, PROV and Dublin
+Core: its files, statistics, licence, sources and how it was made (decisions 0006 and 0018 of judaicalink-data). The
+kinds and methods of the datasets are concepts of the dataset `judaicalink-vocabulary`, stated as `dcterms:type`. The
+dataset terms of the former labs portal are under "Deprecated terms".
 
 #### jl:currentSubjects
 ```
 jl:currentSubjects
     a rdf:Property ;
-    rdfs:label "current subjects"@en ;
-    rdfs:comment "The number of distinct subjects of a dataset version that are current: not replaced (dcterms:isReplacedBy), merged (jl:mergedInto), split (jl:splitInto), retired (jl:retiredDate) or deprecated (owl:deprecated). void:distinctSubjects counts every IRI the data holds, including the ones kept only for their history, and so grows with every new IRI; for entity pages, jl:currentSubjects is the number of entities."@en ;
+    rdfs:label "current subjects"@en, "aktuelle Subjekte"@de ;
+    rdfs:comment "The number of distinct subjects of a dataset version that are not replaced, merged, split, retired or deprecated; for the entities of JudaicaLink, the number of entities. void:distinctSubjects counts every IRI."@en ;
     rdfs:domain void:Dataset ;
     rdfs:range xsd:integer .
+```
+
+### Deprecated terms
+
+Terms of earlier versions; where there is one, the comment names the term to use instead.
+
+#### jl:EntityPage
+```
+jl:EntityPage
+    a owl:Class ;
+    rdfs:label "entity page"@en ;
+    rdfs:comment "Deprecated; an entity has the class of what it is (foaf:Person, schema:Place, …)."@en ;
+    owl:deprecated true .
+```
+#### jl:represents
+```
+jl:represents
+    a rdf:Property ;
+    rdfs:label "represents"@en ;
+    rdfs:comment "Deprecated; use jl:sameAs."@en ;
+    owl:deprecated true .
+```
+#### jl:Place
+```
+jl:Place
+    a owl:Class ;
+    rdfs:label "place"@en ;
+    rdfs:comment "Deprecated; use schema:Place."@en ;
+    owl:deprecated true .
+```
+#### jl:Work
+```
+jl:Work
+    a owl:Class ;
+    rdfs:label "work"@en ;
+    rdfs:comment "Deprecated; use schema:CreativeWork."@en ;
+    owl:deprecated true .
+```
+#### jl:Subject
+```
+jl:Subject
+    a owl:Class ;
+    rdfs:label "subject"@en ;
+    rdfs:comment "Deprecated; use skos:Concept."@en ;
+    owl:deprecated true .
+```
+#### jl:birthYear
+```
+jl:birthYear
+    a rdf:Property ;
+    rdfs:label "birth year"@en ;
+    rdfs:comment "Deprecated; use jl:birthDate and jl:birthDateNormalized."@en ;
+    owl:deprecated true .
+```
+#### jl:deathYear
+```
+jl:deathYear
+    a rdf:Property ;
+    rdfs:label "death year"@en ;
+    rdfs:comment "Deprecated; use jl:deathDate and jl:deathDateNormalized."@en ;
+    owl:deprecated true .
+```
+#### jl:lat
+```
+jl:lat
+    a rdf:Property ;
+    rdfs:label "latitude"@en ;
+    rdfs:comment "Deprecated; use geo:asWKT."@en ;
+    owl:deprecated true .
+```
+#### jl:lon
+```
+jl:lon
+    a rdf:Property ;
+    rdfs:label "longitude"@en ;
+    rdfs:comment "Deprecated; use geo:asWKT."@en ;
+    owl:deprecated true .
+```
+#### jl:hasCategory
+```
+jl:hasCategory
+    a rdf:Property ;
+    rdfs:label "has category "@en ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
+```
+#### jl:hasAnnotation
+```
+jl:hasAnnotation
+    a rdf:Property ;
+    rdfs:label "has annotation"@en ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
+```
+#### jl:Resource
+```
+jl:Resource
+    a owl:Class ;
+    rdfs:label "Resource"@en ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
+```
+#### jl:Journal
+```
+jl:Journal
+    a owl:Class ;
+    rdfs:label "Journal"@en ;
+    rdfs:comment "Deprecated; use schema:Periodical."@en ;
+    owl:deprecated true .
+```
+#### jl:Issue
+```
+jl:Issue
+    a owl:Class ;
+    rdfs:label "Journal issue"@en ;
+    rdfs:comment "Deprecated; use schema:PublicationIssue."@en ;
+    owl:deprecated true .
+```
+#### jl:Annotation
+```
+jl:Annotation
+    a owl:Class ;
+    rdfs:comment "Deprecated; use oa:Annotation."@en ;
+    owl:deprecated true .
+```
+#### jl:text
+```
+jl:text
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated; use oa:bodyValue."@en ;
+    owl:deprecated true .
+```
+#### jl:uuid
+```
+jl:uuid
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
+```
+#### jl:status
+```
+jl:status
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
+```
+#### jl:published
+```
+jl:published
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
+```
+#### jl:issue-url
+```
+jl:issue-url
+    a owl:ObjectProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
+```
+#### jl:tag
+```
+jl:tag
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
+```
+#### jl:user
+```
+jl:user
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
+```
+#### jl:timestamp
+```
+jl:timestamp
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
+```
+#### jl:ip
+```
+jl:ip
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
+```
+#### jl:Dataset
+```
+jl:Dataset
+    a owl:Class ;
+    rdfs:label "Dataset"@en ;
+    rdfs:comment "Deprecated; use void:Dataset."@en ;
+    owl:deprecated true .
+```
+#### jl:hasTitle
+```
+jl:hasTitle
+    a owl:DatatypeProperty ;
+    rdfs:label "title of the dataset"@en ;
+    rdfs:comment "Deprecated; use dcterms:title."@en ;
+    owl:deprecated true .
+```
+#### jl:hasDescription
+```
+jl:hasDescription
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated; use dcterms:description."@en ;
+    owl:deprecated true .
+```
+#### jl:hasFiles
+```
+jl:hasFiles
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated; use dcat:distribution."@en ;
+    owl:deprecated true .
+```
+#### jl:createdAt
+```
+jl:createdAt
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated; use dcterms:created."@en ;
+    owl:deprecated true .
+```
+#### jl:hasAuthor
+```
+jl:hasAuthor
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated; use dcterms:creator."@en ;
+    owl:deprecated true .
+```
+#### jl:hasAuthorEmail
+```
+jl:hasAuthorEmail
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
+```
+#### jl:hasAuthorlink
+```
+jl:hasAuthorlink
+    a owl:ObjectProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
+```
+#### jl:hasSlug
+```
+jl:hasSlug
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated; use dcterms:identifier."@en ;
+    owl:deprecated true .
+```
+#### jl:hasGraph
+```
+jl:hasGraph
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
+```
+#### jl:isLoaded
+```
+jl:isLoaded
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
+```
+#### jl:hasExample
+```
+jl:hasExample
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated; use void:exampleResource."@en ;
+    owl:deprecated true .
+```
+#### jl:hasLicense
+```
+jl:hasLicense
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated; use dcterms:license."@en ;
+    owl:deprecated true .
+```
+#### jl:hasSource
+```
+jl:hasSource
+    a owl:DatatypeProperty ;
+    rdfs:comment "Deprecated; use dcterms:source."@en ;
+    owl:deprecated true .
+```
+#### jl:gitCommit
+```
+jl:gitCommit
+    a owl:DatatypeProperty ;
+    rdfs:label "git commit"@en ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
+```
+#### jl:gitWeb
+```
+jl:gitWeb
+    a owl:DatatypeProperty ;
+    rdfs:label "Git web URL"@en ;
+    rdfs:comment "Deprecated."@en ;
+    owl:deprecated true .
 ```
 
 ### Metadata
@@ -973,4 +1231,3 @@ The JudaicaLink ontology is maintained on Github via the following document:
 https://github.com/judaicalink/judaicalink-ontology/blob/master/judaicalink-ontology.md)
 
 You can create comments on the file and/or raise an [issue](https://github.com/judaicalink/judaicalink-ontology/issues).
-
