@@ -8,6 +8,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix void: <http://rdfs.org/ns/void#> .
 skos:altLabel
     a rdf:Property ;
     rdfs:label "alternative label"@en ;
@@ -507,3 +508,9 @@ jl:hasLinkProb
     rdfs:label "has link probability"@en ;
     rdfs:comment "Link probability or prior probability that the spotted text refers to the linked entity."@en ;
     rdfs:range xsd:decimal .
+jl:currentSubjects
+    a rdf:Property ;
+    rdfs:label "current subjects"@en ;
+    rdfs:comment "The number of distinct subjects of a dataset version that are current: not replaced (dcterms:isReplacedBy), merged (jl:mergedInto), split (jl:splitInto), retired (jl:retiredDate) or deprecated (owl:deprecated). void:distinctSubjects counts every IRI the data holds, including the ones kept only for their history, and so grows with every new IRI; for entity pages, jl:currentSubjects is the number of entities."@en ;
+    rdfs:domain void:Dataset ;
+    rdfs:range xsd:integer .
