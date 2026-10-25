@@ -29,7 +29,9 @@ Dublin Core: only the DCMI Metadata Terms (`dcterms:`), also where a source uses
 - the haskala database: `http://data.judaicalink.org/data/haskala/vocab/` (file `haskala-vocabulary.ttl.gz` of the
   dataset `haskala`);
 - the Biographisches Portal der Rabbiner: `http://data.judaicalink.org/data/bhr/vocab/` (file
-  `bhr-vocabulary.ttl.gz` of the dataset `bhr`).
+  `bhr-vocabulary.ttl.gz` of the dataset `bhr`);
+- Footprints: `http://data.judaicalink.org/data/footprints/vocab/` (file `footprints-vocabulary.ttl.gz` of the dataset
+  `footprints`).
 
 ### Namespaces
 The following namespaces are used in this ontology:
@@ -138,7 +140,7 @@ owl:sameAs
 ```
 dcterms:isReplacedBy
     jl:label "replaced by"@en, "ersetzt durch"@de ;
-    jl:comment "An identifier replaced by another, by its source (e.g. a merged GND number) or by us (a new IRI). Only replacements between our own IRIs count as identity."@en, "Ein Identifikator, der durch einen anderen ersetzt ist: ein Identifikator einer Quelle, den die Quelle ersetzt hat (z. B. eine zusammengeführte GND-Nummer, mit den IRIs der Quelle), oder eine unserer IRIs, die durch eine neue ersetzt ist (z. B. wenn ein Datensatz neu aus seiner Quelle erzeugt wird)."@de .
+    jl:comment "An identifier replaced by another, by its source (e.g. a merged GND number) or by us (a new IRI). Only replacements between our own IRIs count as identity. An IRI replaced by several stood for all of them (e.g. one IRI for all persons of one name); its entity is split."@en, "Ein Identifikator, der durch einen anderen ersetzt ist: ein Identifikator einer Quelle, den die Quelle ersetzt hat (z. B. eine zusammengeführte GND-Nummer, mit den IRIs der Quelle), oder eine unserer IRIs, die durch eine neue ersetzt ist (z. B. wenn ein Datensatz neu aus seiner Quelle erzeugt wird). Eine IRI, die durch mehrere ersetzt ist, stand für alle (z. B. eine IRI für alle Personen eines Namens); ihre Entität wird geteilt."@de .
 ```
 #### owl:deprecated
 ```
@@ -461,7 +463,7 @@ jl:deathDate
 jl:birthDateNormalized
     a rdf:Property ;
     rdfs:label "normalised birth date"@en, "normalisiertes Geburtsdatum"@de ;
-    rdfs:comment "The birth date of the person as xsd:date, xsd:gYearMonth or xsd:gYear, derived from the free text of jl:birthDate, which stays as it is."@en ;
+    rdfs:comment "The birth date of the person as xsd:date, xsd:gYearMonth or xsd:gYear, or as EDTF (datatype http://id.loc.gov/datatypes/edtf/EDTF) where it is an interval, approximate, uncertain or partly unspecified; derived from the free text of jl:birthDate, which stays as it is, or from the normalised form the source gives."@en ;
     rdfs:range rdfs:Literal .
 ```
 #### jl:birthDateUncertain
@@ -477,7 +479,7 @@ jl:birthDateUncertain
 jl:deathDateNormalized
     a rdf:Property ;
     rdfs:label "normalised death date"@en, "normalisiertes Sterbedatum"@de ;
-    rdfs:comment "The death date of the person as xsd:date, xsd:gYearMonth or xsd:gYear, derived from the free text of jl:deathDate, which stays as it is."@en ;
+    rdfs:comment "The death date of the person as xsd:date, xsd:gYearMonth or xsd:gYear, or as EDTF (datatype http://id.loc.gov/datatypes/edtf/EDTF) where it is an interval, approximate, uncertain or partly unspecified; derived from the free text of jl:deathDate, which stays as it is, or from the normalised form the source gives."@en ;
     rdfs:range rdfs:Literal .
 ```
 #### jl:deathDateUncertain
