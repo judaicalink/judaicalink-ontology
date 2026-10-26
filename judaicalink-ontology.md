@@ -654,6 +654,28 @@ gndo:dateOfTermination
     jl:label "date of termination"@en, "Auflösungsdatum"@de ;
     jl:comment "The date of termination of an organisation, as given by the source (hhkeydocs, nrwbibdjg)."@en, "Das Auflösungsdatum einer Organisation, wie von der Quelle angegeben (hhkeydocs, nrwbibdjg)."@de .
 ```
+#### jl:establishmentDateNormalized
+```
+jl:establishmentDateNormalized
+    a rdf:Property ;
+    rdfs:label "normalised date of establishment"@en, "normalisiertes Gründungsdatum"@de ;
+    rdfs:comment "The date of establishment of an organisation as xsd:date, xsd:gYearMonth, xsd:gYear or EDTF, with gndo:dateOfEstablishment as the source gives it (entity pages)."@en ;
+    rdfs:range rdfs:Literal .
+```
+#### jl:terminationDateNormalized
+```
+jl:terminationDateNormalized
+    a rdf:Property ;
+    rdfs:label "normalised date of termination"@en, "normalisiertes Auflösungsdatum"@de ;
+    rdfs:comment "The date of termination of an organisation as xsd:date, xsd:gYearMonth, xsd:gYear or EDTF, with gndo:dateOfTermination as the source gives it (entity pages)."@en ;
+    rdfs:range rdfs:Literal .
+```
+#### gndo:placeOfBusiness
+```
+gndo:placeOfBusiness
+    jl:label "seat"@en, "Sitz"@de ;
+    jl:comment "The seat of an organisation, as the record or identifier of the place (gnd, entity pages)."@en, "Der Sitz einer Organisation, als Datensatz oder Identifikator des Orts (gnd, Entitätsseiten)."@de .
+```
 #### dcterms:isPartOf
 ```
 dcterms:isPartOf
@@ -664,8 +686,29 @@ dcterms:isPartOf
 ```
 dcterms:issued
     jl:label "issued"@en, "erschienen"@de ;
-    jl:comment "The year of publication of a work or volume, as given by the source (compact-memory, nrwbibdjg)."@en, "Das Erscheinungsjahr eines Werks oder Bandes, wie von der Quelle angegeben (compact-memory, nrwbibdjg)."@de ;
+    jl:comment "The year or date of publication of a work or volume, as given by the source (compact-memory, nrwbibdjg, footprints, entity pages)."@en, "Das Erscheinungsjahr oder -datum eines Werks oder Bandes, wie von der Quelle angegeben (compact-memory, nrwbibdjg, footprints, Entitätsseiten)."@de ;
     rdfs:range rdfs:Literal .
+```
+#### jl:issuedNormalized
+```
+jl:issuedNormalized
+    a rdf:Property ;
+    rdfs:label "normalised date of publication"@en, "normalisiertes Erscheinungsdatum"@de ;
+    rdfs:comment "The date of publication of a work as xsd:date, xsd:gYearMonth or xsd:gYear, or as EDTF (datatype http://id.loc.gov/datatypes/edtf/EDTF) where it is an interval, approximate, uncertain or partly unspecified; on the entity pages, with dcterms:issued as the source gives it."@en ;
+    rdfs:range rdfs:Literal .
+```
+#### jl:placeOfPublicationURI
+```
+jl:placeOfPublicationURI
+    a rdf:Property ;
+    rdfs:label "place of publication (IRI)"@en, "Erscheinungsort (IRI)"@de ;
+    rdfs:comment "The place of publication of a work as the record or identifier of the place (entity pages, from haskala and footprints); jl:placeOfPublication is the text."@en .
+```
+#### dcterms:language
+```
+dcterms:language
+    jl:label "language"@en, "Sprache"@de ;
+    jl:comment "The language of a work, as the source gives it: a language code of the Library of Congress (gnd), a term of the source's vocabulary (haskala, footprints) (entity pages)."@en, "Die Sprache eines Werks, wie die Quelle sie angibt: ein Sprachcode der Library of Congress (gnd), ein Begriff des Vokabulars der Quelle (haskala, footprints) (Entitätsseiten)."@de .
 ```
 #### dcterms:bibliographicCitation
 ```
@@ -815,7 +858,7 @@ jl:subtitle
 jl:placeOfPublication
     a rdf:Property ;
     rdfs:label "place of publication"@en ;
-    rdfs:comment "Place where a journal was published, as given by the library (text)."@en ;
+    rdfs:comment "Place where a journal or work was published, as given by the source (text; compact-memory, entity pages)."@en ;
     rdfs:range rdfs:Literal .
 ```
 #### jl:publicationPeriod
