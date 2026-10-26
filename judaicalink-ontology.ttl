@@ -37,7 +37,7 @@ owl:sameAs
     rdfs:range owl:Thing .
 dcterms:isReplacedBy
     jl:label "replaced by"@en, "ersetzt durch"@de ;
-    jl:comment "An identifier replaced by another, by its source (e.g. a merged GND number) or by us (a new IRI). Only replacements between our own IRIs count as identity."@en, "Ein Identifikator, der durch einen anderen ersetzt ist: ein Identifikator einer Quelle, den die Quelle ersetzt hat (z. B. eine zusammengeführte GND-Nummer, mit den IRIs der Quelle), oder eine unserer IRIs, die durch eine neue ersetzt ist (z. B. wenn ein Datensatz neu aus seiner Quelle erzeugt wird)."@de .
+    jl:comment "An identifier replaced by another, by its source (e.g. a merged GND number) or by us (a new IRI). Only replacements between our own IRIs count as identity. An IRI replaced by several stood for all of them (e.g. one IRI for all persons of one name); its entity is split."@en, "Ein Identifikator, der durch einen anderen ersetzt ist: ein Identifikator einer Quelle, den die Quelle ersetzt hat (z. B. eine zusammengeführte GND-Nummer, mit den IRIs der Quelle), oder eine unserer IRIs, die durch eine neue ersetzt ist (z. B. wenn ein Datensatz neu aus seiner Quelle erzeugt wird). Eine IRI, die durch mehrere ersetzt ist, stand für alle (z. B. eine IRI für alle Personen eines Namens); ihre Entität wird geteilt."@de .
 owl:deprecated
     jl:label "deprecated"@en, "veraltet"@de ;
     jl:comment "An identifier that is no longer valid and has no successor: deleted by its source, or an IRI of ours that could not be assigned to a new record."@en, "Ein Identifikator, der nicht mehr gültig ist und keinen Nachfolger hat: von seiner Quelle gelöscht, oder eine unserer IRIs, die keinem neuen Datensatz zugeordnet werden konnte."@de ;
@@ -208,7 +208,7 @@ jl:deathDate
 jl:birthDateNormalized
     a rdf:Property ;
     rdfs:label "normalised birth date"@en, "normalisiertes Geburtsdatum"@de ;
-    rdfs:comment "The birth date of the person as xsd:date, xsd:gYearMonth or xsd:gYear, derived from the free text of jl:birthDate, which stays as it is."@en ;
+    rdfs:comment "The birth date of the person as xsd:date, xsd:gYearMonth or xsd:gYear, or as EDTF (datatype http://id.loc.gov/datatypes/edtf/EDTF) where it is an interval, approximate, uncertain or partly unspecified; derived from the free text of jl:birthDate, which stays as it is, or from the normalised form the source gives."@en ;
     rdfs:range rdfs:Literal .
 jl:birthDateUncertain
     a rdf:Property ;
@@ -218,7 +218,7 @@ jl:birthDateUncertain
 jl:deathDateNormalized
     a rdf:Property ;
     rdfs:label "normalised death date"@en, "normalisiertes Sterbedatum"@de ;
-    rdfs:comment "The death date of the person as xsd:date, xsd:gYearMonth or xsd:gYear, derived from the free text of jl:deathDate, which stays as it is."@en ;
+    rdfs:comment "The death date of the person as xsd:date, xsd:gYearMonth or xsd:gYear, or as EDTF (datatype http://id.loc.gov/datatypes/edtf/EDTF) where it is an interval, approximate, uncertain or partly unspecified; derived from the free text of jl:deathDate, which stays as it is, or from the normalised form the source gives."@en ;
     rdfs:range rdfs:Literal .
 jl:deathDateUncertain
     a rdf:Property ;
@@ -320,13 +320,38 @@ gndo:dateOfEstablishment
 gndo:dateOfTermination
     jl:label "date of termination"@en, "Auflösungsdatum"@de ;
     jl:comment "The date of termination of an organisation, as given by the source (hhkeydocs, nrwbibdjg)."@en, "Das Auflösungsdatum einer Organisation, wie von der Quelle angegeben (hhkeydocs, nrwbibdjg)."@de .
+jl:establishmentDateNormalized
+    a rdf:Property ;
+    rdfs:label "normalised date of establishment"@en, "normalisiertes Gründungsdatum"@de ;
+    rdfs:comment "The date of establishment of an organisation as xsd:date, xsd:gYearMonth, xsd:gYear or EDTF, with gndo:dateOfEstablishment as the source gives it (entity pages)."@en ;
+    rdfs:range rdfs:Literal .
+jl:terminationDateNormalized
+    a rdf:Property ;
+    rdfs:label "normalised date of termination"@en, "normalisiertes Auflösungsdatum"@de ;
+    rdfs:comment "The date of termination of an organisation as xsd:date, xsd:gYearMonth, xsd:gYear or EDTF, with gndo:dateOfTermination as the source gives it (entity pages)."@en ;
+    rdfs:range rdfs:Literal .
+gndo:placeOfBusiness
+    jl:label "seat"@en, "Sitz"@de ;
+    jl:comment "The seat of an organisation, as the record or identifier of the place (gnd, entity pages)."@en, "Der Sitz einer Organisation, als Datensatz oder Identifikator des Orts (gnd, Entitätsseiten)."@de .
 dcterms:isPartOf
     jl:label "part of"@en, "Teil von"@de ;
     jl:comment "The resource of which a resource is a part: the journal of a volume, the corpus of a journal (compact-memory), the journal or volume of an article (nrwbibdjg), the part of a book (haskala)."@en, "Die Ressource, zu der eine Ressource gehört: die Zeitschrift eines Jahrgangs, das Korpus einer Zeitschrift (compact-memory), die Zeitschrift oder der Sammelband eines Artikels (nrwbibdjg), der Teil eines Buchs (haskala)."@de .
 dcterms:issued
     jl:label "issued"@en, "erschienen"@de ;
-    jl:comment "The year of publication of a work or volume, as given by the source (compact-memory, nrwbibdjg)."@en, "Das Erscheinungsjahr eines Werks oder Bandes, wie von der Quelle angegeben (compact-memory, nrwbibdjg)."@de ;
+    jl:comment "The year or date of publication of a work or volume, as given by the source (compact-memory, nrwbibdjg, footprints, entity pages)."@en, "Das Erscheinungsjahr oder -datum eines Werks oder Bandes, wie von der Quelle angegeben (compact-memory, nrwbibdjg, footprints, Entitätsseiten)."@de ;
     rdfs:range rdfs:Literal .
+jl:issuedNormalized
+    a rdf:Property ;
+    rdfs:label "normalised date of publication"@en, "normalisiertes Erscheinungsdatum"@de ;
+    rdfs:comment "The date of publication of a work as xsd:date, xsd:gYearMonth or xsd:gYear, or as EDTF (datatype http://id.loc.gov/datatypes/edtf/EDTF) where it is an interval, approximate, uncertain or partly unspecified; on the entity pages, with dcterms:issued as the source gives it."@en ;
+    rdfs:range rdfs:Literal .
+jl:placeOfPublicationURI
+    a rdf:Property ;
+    rdfs:label "place of publication (IRI)"@en, "Erscheinungsort (IRI)"@de ;
+    rdfs:comment "The place of publication of a work as the record or identifier of the place (entity pages, from haskala and footprints); jl:placeOfPublication is the text."@en .
+dcterms:language
+    jl:label "language"@en, "Sprache"@de ;
+    jl:comment "The language of a work, as the source gives it: a language code of the Library of Congress (gnd), a term of the source's vocabulary (haskala, footprints) (entity pages)."@en, "Die Sprache eines Werks, wie die Quelle sie angibt: ein Sprachcode der Library of Congress (gnd), ein Begriff des Vokabulars der Quelle (haskala, footprints) (Entitätsseiten)."@de .
 dcterms:bibliographicCitation
     jl:label "bibliographic citation"@en, "bibliografische Angabe"@de ;
     jl:comment "A bibliographic reference as text: where a record is printed (bhr: volume and page of the handbook) or the rest of the citation of a title (nrwbibdjg)."@en, "Eine bibliografische Angabe als Text: wo ein Datensatz gedruckt ist (bhr: Band und Seite des Handbuchs) oder der Rest der Zitierangabe eines Titels (nrwbibdjg)."@de ;
@@ -403,7 +428,7 @@ jl:subtitle
 jl:placeOfPublication
     a rdf:Property ;
     rdfs:label "place of publication"@en ;
-    rdfs:comment "Place where a journal was published, as given by the library (text)."@en ;
+    rdfs:comment "Place where a journal or work was published, as given by the source (text; compact-memory, entity pages)."@en ;
     rdfs:range rdfs:Literal .
 jl:publicationPeriod
     a rdf:Property ;
