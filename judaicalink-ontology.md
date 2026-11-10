@@ -755,7 +755,8 @@ skos:inScheme
 ### Annotations
 
 Quality annotations: statements about the data (e.g. a date that cannot be read, an identifier that leads to several
-records), made by checks of JudaicaLink (datasets quality-annotations, ls-nli-legacy).
+records, records of one entity that state different values), made by checks of JudaicaLink (datasets
+quality-annotations, ls-nli-legacy, conflicts).
 
 #### oa:Annotation
 ```
@@ -791,6 +792,15 @@ oa:motivatedBy
     jl:comment "Why the annotation was made (e.g. assessing the quality)."@en, "Warum die Annotation gemacht wurde (z. B. Bewertung der Qualität)."@de ;
     rdfs:domain oa:Annotation ;
     rdfs:range oa:Motivation .
+```
+#### jl:onProperty
+```
+jl:onProperty
+    a rdf:Property ;
+    rdfs:label "on property"@en, "zur Eigenschaft"@de ;
+    rdfs:comment "The property of the targets that the annotation is about, e.g. jl:birthLocationURI where the records of one person state different places of birth."@en, "Die Eigenschaft der Ziele, um die es in der Annotation geht, z. B. jl:birthLocationURI, wenn die Datensätze einer Person verschiedene Geburtsorte angeben."@de ;
+    rdfs:domain oa:Annotation ;
+    rdfs:range rdf:Property .
 ```
 
 ### Compact Memory
