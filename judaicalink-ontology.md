@@ -336,7 +336,7 @@ jl:describedAt
 jl:hasAbstract
     a rdf:Property ;
     rdfs:label "has abstract"@en, "Kurzbeschreibung"@de ;
-    rdfs:comment "The abstract of the article in which the concept or the person is described "@en ;
+    rdfs:comment "The abstract of the article in which the concept or the person is described; a text with its own attribution: jl:hasAbstractText."@en ;
     rdfs:range rdfs:Literal .
 ```
 #### rdfs:seeAlso
@@ -351,7 +351,7 @@ rdfs:seeAlso
 ```
 foaf:depiction
     jl:label "depiction"@en, "Abbildung"@de ;
-    jl:comment "An image of the resource: a picture of a person, a reproduction of a work or of a copy (footprints, haskala-net)."@en, "Ein Bild der Ressource: ein Bild einer Person, eine Abbildung eines Werks oder eines Exemplars (footprints, haskala-net)."@de ;
+    jl:comment "An image of the resource whose attribution is that of the dataset: a reproduction of a copy (footprints). An image with its own attribution: jl:hasImage."@en, "Ein Bild der Ressource, dessen Zuschreibung die des Datensatzes ist: eine Abbildung eines Exemplars (footprints). Ein Bild mit eigener Zuschreibung: jl:hasImage."@de ;
     rdfs:domain owl:Thing ;
     rdfs:range foaf:Image .
 ```
@@ -359,7 +359,7 @@ foaf:depiction
 ```
 dcterms:description
     jl:label "description"@en, "Beschreibung"@de ;
-    jl:comment "A description as text, as the source gives it: the caption of a picture (haskala-net), the description of a corpus (compact-memory)."@en, "Eine Beschreibung als Text, wie die Quelle sie gibt: die Bildunterschrift eines Bildes (haskala-net), die Beschreibung eines Korpus (compact-memory)."@de .
+    jl:comment "A description as text, as the source gives it: the caption of an image (jl:Image), the description of a corpus (compact-memory)."@en, "Eine Beschreibung als Text, wie die Quelle sie gibt: die Bildunterschrift eines Bildes (jl:Image), die Beschreibung eines Korpus (compact-memory)."@de .
 ```
 #### foaf:isPrimaryTopicOf
 ```
@@ -440,6 +440,114 @@ dcterms:date
 dcterms:subject
     jl:label "subject"@en, "Thema"@de ;
     jl:comment "The topic of a resource (a category or subject heading of the source)."@en, "Das Thema einer Ressource (eine Kategorie oder ein Schlagwort der Quelle)."@de .
+```
+
+### Texts and images
+
+A text or an image of a source that needs its own attribution: who wrote it, whose photograph it is, where it comes
+from, under which licence, when that differs from the dataset that states it (texts and pictures of haskala-net, by
+named authors and with the credit lines of the site). The text or image is a resource of its own, linked by an object
+property, and carries its attribution, so that every page that shows it can show the attribution with it. A text is
+held in the data (`rdf:value`); an image is only linked (`schema:contentUrl`), never copied. Where the attribution is
+that of the dataset, the value properties are used as before (`jl:hasAbstract`, `foaf:depiction`); never both for the
+same text or picture.
+
+#### jl:Text
+```
+jl:Text
+    a owl:Class ;
+    rdfs:label "text"@en, "Text"@de ;
+    rdfs:comment "A text of a source with its own attribution (an abstract, the beginning of a biography): the text as rdf:value, its authors (dcterms:creator), its page at the source (dcterms:source), how to cite it (dcterms:bibliographicCitation) and its licence where it differs from that of the dataset (dcterms:license)."@en, "Ein Text einer Quelle mit eigener Zuschreibung (eine Kurzbeschreibung, der Anfang einer Biographie): der Text als rdf:value, seine Autorinnen und Autoren (dcterms:creator), seine Seite bei der Quelle (dcterms:source), wie er zu zitieren ist (dcterms:bibliographicCitation) und seine Lizenz, wo sie von der des Datensatzes abweicht (dcterms:license)."@de .
+```
+#### jl:Image
+```
+jl:Image
+    a owl:Class ;
+    rdfs:label "image"@en, "Bild"@de ;
+    rdfs:comment "An image as a source shows it, with its own attribution: the image file on the server of the source (schema:contentUrl, linked, not copied), a smaller version (foaf:thumbnail), the caption (dcterms:description), the credit line (jl:credit), the page that shows it (dcterms:source) and what it depicts (foaf:depicts)."@en, "Ein Bild, wie eine Quelle es zeigt, mit eigener Zuschreibung: die Bilddatei auf dem Server der Quelle (schema:contentUrl, verlinkt, nicht kopiert), eine kleinere Fassung (foaf:thumbnail), die Bildunterschrift (dcterms:description), der Bildnachweis (jl:credit), die Seite, die es zeigt (dcterms:source), und was es darstellt (foaf:depicts)."@de .
+```
+#### jl:hasText
+```
+jl:hasText
+    a owl:ObjectProperty ;
+    rdfs:label "text"@en, "Text"@de ;
+    rdfs:comment "A text about the resource with its own attribution. The most general property; its subproperties name the role of the text."@en, "Ein Text über die Ressource mit eigener Zuschreibung. Die allgemeinste Eigenschaft; ihre Untereigenschaften benennen die Rolle des Textes."@de ;
+    rdfs:range jl:Text .
+```
+#### jl:hasAbstractText
+```
+jl:hasAbstractText
+    a owl:ObjectProperty ;
+    rdfs:label "abstract (text)"@en, "Kurzbeschreibung (Text)"@de ;
+    rdfs:comment "The abstract of the resource as a text with its own attribution (haskala-net: the beginning of the biography); instead of jl:hasAbstract, never next to it."@en, "Die Kurzbeschreibung der Ressource als Text mit eigener Zuschreibung (haskala-net: der Anfang der Biographie); statt jl:hasAbstract, nie daneben."@de ;
+    rdfs:subPropertyOf jl:hasText ;
+    rdfs:range jl:Text .
+```
+#### jl:hasImage
+```
+jl:hasImage
+    a owl:ObjectProperty ;
+    rdfs:label "image"@en, "Bild"@de ;
+    rdfs:comment "An image of the resource with its own attribution; instead of foaf:depiction, never next to it for the same picture."@en, "Ein Bild der Ressource mit eigener Zuschreibung; statt foaf:depiction, nie daneben für dasselbe Bild."@de ;
+    rdfs:range jl:Image .
+```
+#### jl:abridged
+```
+jl:abridged
+    a owl:DatatypeProperty ;
+    rdfs:label "abridged"@en, "gekürzt"@de ;
+    rdfs:comment "The text is only the beginning; the full text is at its source (dcterms:source)."@en, "Der Text ist nur der Anfang; der vollständige Text steht bei seiner Quelle (dcterms:source)."@de ;
+    rdfs:domain jl:Text ;
+    rdfs:range xsd:boolean .
+```
+#### jl:credit
+```
+jl:credit
+    a owl:DatatypeProperty ;
+    rdfs:label "credit"@en, "Bildnachweis"@de ;
+    rdfs:comment "The credit line of an image as the source gives it (e.g. 'Foto: Jüdisches Museum Berlin'), not parsed into an agent."@en, "Der Bildnachweis eines Bildes, wie die Quelle ihn angibt (z. B. 'Foto: Jüdisches Museum Berlin'), nicht in eine Person oder Institution zerlegt."@de ;
+    rdfs:domain jl:Image ;
+    rdfs:range rdfs:Literal .
+```
+#### rdf:value
+```
+rdf:value
+    jl:label "text"@en, "Text"@de ;
+    jl:comment "The text of a jl:Text, with its language."@en, "Der Text eines jl:Text, mit seiner Sprache."@de .
+```
+#### schema:contentUrl
+```
+schema:contentUrl
+    jl:label "file"@en, "Datei"@de ;
+    jl:comment "The image file of a jl:Image on the server of the source: linked, not copied."@en, "Die Bilddatei eines jl:Image auf dem Server der Quelle: verlinkt, nicht kopiert."@de .
+```
+#### foaf:thumbnail
+```
+foaf:thumbnail
+    jl:label "thumbnail"@en, "Vorschaubild"@de ;
+    jl:comment "A smaller version of the image file, as the source offers it."@en, "Eine kleinere Fassung der Bilddatei, wie die Quelle sie anbietet."@de ;
+    rdfs:domain foaf:Image ;
+    rdfs:range foaf:Image .
+```
+#### foaf:depicts
+```
+foaf:depicts
+    jl:label "depicts"@en, "stellt dar"@de ;
+    jl:comment "What an image shows: a person, a work (a portrait)."@en, "Was ein Bild darstellt: eine Person, ein Werk (ein Porträt)."@de ;
+    rdfs:domain foaf:Image ;
+    rdfs:range owl:Thing .
+```
+#### dcterms:source
+```
+dcterms:source
+    jl:label "source"@en, "Quelle"@de ;
+    jl:comment "The page of the source that a text or an image comes from."@en, "Die Seite der Quelle, von der ein Text oder ein Bild stammt."@de .
+```
+#### dcterms:license
+```
+dcterms:license
+    jl:label "licence"@en, "Lizenz"@de ;
+    jl:comment "The licence of a text or an image, where it differs from that of its dataset (the licence of a dataset is in its -meta)."@en, "Die Lizenz eines Textes oder Bildes, wo sie von der seines Datensatzes abweicht (die Lizenz eines Datensatzes steht in seinem -meta)."@de .
 ```
 
 ### Persons
@@ -628,7 +736,7 @@ gndo:hierarchicalSuperiorOfPlaceOrGeographicName
 ```
 dcterms:creator
     jl:label "creator"@en, "Urheber"@de ;
-    jl:comment "The creator of a work: the record of a person, or the name as text where the source does not identify the person (footprints, nli-records, nrwbibdjg)."@en, "Der Urheber eines Werks: der Datensatz einer Person oder der Name als Text, wo die Quelle die Person nicht identifiziert (footprints, nli-records, nrwbibdjg)."@de .
+    jl:comment "The creator of a work or of a text (jl:Text): the record of a person, or the name as text where the source does not identify the person (footprints, nli-records, nrwbibdjg, haskala-net)."@en, "Der Urheber eines Werks oder eines Textes (jl:Text): der Datensatz einer Person oder der Name als Text, wo die Quelle die Person nicht identifiziert (footprints, nli-records, nrwbibdjg, haskala-net)."@de .
 ```
 #### dcterms:contributor
 ```
@@ -728,7 +836,7 @@ dcterms:language
 ```
 dcterms:bibliographicCitation
     jl:label "bibliographic citation"@en, "bibliografische Angabe"@de ;
-    jl:comment "A bibliographic reference as text: where a record is printed (bhr: volume and page of the handbook) or the rest of the citation of a title (nrwbibdjg)."@en, "Eine bibliografische Angabe als Text: wo ein Datensatz gedruckt ist (bhr: Band und Seite des Handbuchs) oder der Rest der Zitierangabe eines Titels (nrwbibdjg)."@de ;
+    jl:comment "A bibliographic reference as text: where a record is printed (bhr: volume and page of the handbook), the rest of the citation of a title (nrwbibdjg), an entry of a bibliography or how to cite a text (haskala-net)."@en, "Eine bibliografische Angabe als Text: wo ein Datensatz gedruckt ist (bhr: Band und Seite des Handbuchs), der Rest der Zitierangabe eines Titels (nrwbibdjg), ein Eintrag einer Bibliographie oder wie ein Text zu zitieren ist (haskala-net)."@de ;
     rdfs:range rdfs:Literal .
 ```
 
