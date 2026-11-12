@@ -347,6 +347,20 @@ rdfs:seeAlso
     rdfs:domain rdfs:Resource ;
     rdfs:range rdfs:Resource .
 ```
+#### foaf:depiction
+```
+foaf:depiction
+    jl:label "depiction"@en, "Abbildung"@de ;
+    jl:comment "An image of the resource: a picture of a person, a reproduction of a work or of a copy (footprints, haskala-net)."@en, "Ein Bild der Ressource: ein Bild einer Person, eine Abbildung eines Werks oder eines Exemplars (footprints, haskala-net)."@de ;
+    rdfs:domain owl:Thing ;
+    rdfs:range foaf:Image .
+```
+#### dcterms:description
+```
+dcterms:description
+    jl:label "description"@en, "Beschreibung"@de ;
+    jl:comment "A description as text, as the source gives it: the caption of a picture (haskala-net), the description of a corpus (compact-memory)."@en, "Eine Beschreibung als Text, wie die Quelle sie gibt: die Bildunterschrift eines Bildes (haskala-net), die Beschreibung eines Korpus (compact-memory)."@de .
+```
 #### foaf:isPrimaryTopicOf
 ```
 foaf:isPrimaryTopicOf
