@@ -447,8 +447,9 @@ dcterms:subject
 A text or an image of a source that needs its own attribution: who wrote it, whose photograph it is, where it comes
 from, under which licence, when that differs from the dataset that states it (texts and pictures of haskala-net, by
 named authors and with the credit lines of the site). The text or image is a resource of its own, linked by an object
-property, and carries its attribution, so that every page that shows it can show the attribution with it. A text is
-held in the data (`rdf:value`); an image is only linked (`schema:contentUrl`), never copied. Where the attribution is
+property, and carries its attribution, so that every page that shows it can show the attribution with it. The text
+itself is its `rdf:value`; the image file is its `schema:contentUrl`, wherever it is (at the source, or a file of a
+dataset). Where the attribution is
 that of the dataset, the value properties are used as before (`jl:hasAbstract`, `foaf:depiction`); never both for the
 same text or picture.
 
@@ -464,7 +465,7 @@ jl:Text
 jl:Image
     a owl:Class ;
     rdfs:label "image"@en, "Bild"@de ;
-    rdfs:comment "An image as a source shows it, with its own attribution: the image file on the server of the source (schema:contentUrl, linked, not copied), a smaller version (foaf:thumbnail), the caption (dcterms:description), the credit line (jl:credit), the page that shows it (dcterms:source) and what it depicts (foaf:depicts)."@en, "Ein Bild, wie eine Quelle es zeigt, mit eigener Zuschreibung: die Bilddatei auf dem Server der Quelle (schema:contentUrl, verlinkt, nicht kopiert), eine kleinere Fassung (foaf:thumbnail), die Bildunterschrift (dcterms:description), der Bildnachweis (jl:credit), die Seite, die es zeigt (dcterms:source), und was es darstellt (foaf:depicts)."@de .
+    rdfs:comment "An image as a source shows it, with its own attribution: the image file (schema:contentUrl), a smaller version (foaf:thumbnail), the caption (dcterms:description), the credit line (jl:credit), the page that shows it (dcterms:source) and what it depicts (foaf:depicts)."@en, "Ein Bild, wie eine Quelle es zeigt, mit eigener Zuschreibung: die Bilddatei (schema:contentUrl), eine kleinere Fassung (foaf:thumbnail), die Bildunterschrift (dcterms:description), der Bildnachweis (jl:credit), die Seite, die es zeigt (dcterms:source), und was es darstellt (foaf:depicts)."@de .
 ```
 #### jl:hasText
 ```
@@ -519,7 +520,7 @@ rdf:value
 ```
 schema:contentUrl
     jl:label "file"@en, "Datei"@de ;
-    jl:comment "The image file of a jl:Image on the server of the source: linked, not copied."@en, "Die Bilddatei eines jl:Image auf dem Server der Quelle: verlinkt, nicht kopiert."@de .
+    jl:comment "The image file of a jl:Image: on the server of the source (haskala-net) or a file of a dataset."@en, "Die Bilddatei eines jl:Image: auf dem Server der Quelle (haskala-net) oder eine Datei eines Datensatzes."@de .
 ```
 #### foaf:thumbnail
 ```
